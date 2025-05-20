@@ -1,0 +1,911 @@
+import streamlit as st
+
+def get_streamlit_app_content(gemini_api_key_js):
+    """
+    Generates the HTML, CSS, and JavaScript content for the Streamlit app.
+    The Gemini API key is injected into the JavaScript part.
+    """
+
+    # Minified versions of your provided CSS and JavaScript for brevity in this example
+    # In a real scenario, you'd paste your full CSS and JS here.
+    
+    style_content = """
+        body {
+            font-family: 'Inter', sans-serif;
+            /* background-color: #F8F9FA; /* Streamlit handles base background, or apply to a wrapper */
+            color: #073B4C;
+            margin: 0;
+            padding: 0;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px; 
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; 
+            max-height: 350px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 320px;
+            }
+        }
+        .stat-card {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .stat-title {
+            font-size: 1.125rem; 
+            font-weight: 600; 
+            margin-bottom: 0.5rem;
+            color: #118AB2; 
+        }
+        .stat-value {
+            font-size: 2.25rem; 
+            font-weight: 700; 
+            color: #FF6B6B; 
+            line-height: 1.1;
+        }
+        .stat-context {
+            font-size: 0.875rem; 
+            color: #4A5568; 
+            margin-top: 0.25rem;
+        }
+        .section-title {
+            font-size: 1.875rem; 
+            font-weight: 700; 
+            color: #073B4C; 
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #118AB2; 
+        }
+        .nav-link {
+            padding: 0.5rem 1rem;
+            color: #073B4C;
+            border-radius: 0.375rem;
+            transition: background-color 0.3s ease;
+        }
+        .nav-link:hover {
+            background-color: #E2E8F0; 
+        }
+        .flowchart-step {
+            border: 2px solid #06D6A0; 
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            text-align: center;
+            background-color: #F0FDFA; 
+            width: 100%;
+            max-width: 20rem; 
+        }
+        .flowchart-arrow {
+            font-size: 1.5rem; 
+            color: #073B4C;
+            margin: 0.5rem 0;
+        }
+        .icon-placeholder {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+        .gemini-button {
+            background-color: #FFD166; /* Sunny Yellow */
+            color: #073B4C; /* Dark Slate Blue */
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            margin-top: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: 1px solid #E7B00B;
+        }
+        .gemini-button:hover {
+            background-color: #FBC53E;
+        }
+        .gemini-response-area {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            background-color: #F0FDFA; /* Light teal for contrast */
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            color: #073B4C;
+            border: 1px solid #06D6A0; /* Tealish Green */
+            white-space: pre-wrap; /* To respect newlines from Gemini */
+        }
+        /* Ensure modal is above Streamlit's default UI elements */
+        #geminiModal {
+            z-index: 1050; /* Streamlit's header is often around 1000-1001 */
+        }
+    """
+
+    body_content_html = """
+    <div style="background-color: #F8F9FA;"> <!-- Wrapper div to set background -->
+        <header class="bg-[#073B4C] text-white py-8 shadow-lg">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-2">Papua New Guinea's Infrastructure</h1>
+                <p class="text-xl md:text-2xl text-[#FFD166]">Challenges, Progress, and the Path to a Resilient Future</p>
+            </div>
+        </header>
+
+        <nav class="bg-white shadow-md sticky top-0 z-50 hidden md:block">
+            <div class="container mx-auto px-4 py-3 flex justify-center space-x-2 overflow-x-auto">
+                <a href="#national-strategies" class="nav-link">National Strategies</a>
+                <a href="#telecom" class="nav-link">Telecom</a>
+                <a href="#transport" class="nav-link">Transport</a>
+                <a href="#energy" class="nav-link">Energy</a>
+                <a href="#wash" class="nav-link">WASH</a>
+                <a href="#cross-cutting" class="nav-link">Enablers</a>
+                <a href="#conclusion" class="nav-link">Conclusion</a>
+            </div>
+        </nav>
+
+        <main class="container mx-auto p-4 md:p-8">
+
+            <section class="mb-12 text-center">
+                <p class="text-lg md:text-xl leading-relaxed max-w-3xl mx-auto text-gray-700">
+                    Since 2015-2016, Papua New Guinea has faced significant infrastructure deficits across crucial sectors. This infographic provides an updated assessment of the evolving landscape, examining developments, persistent challenges, and strategic responses in transport, energy, ICT, and WASH, highlighting the nation's journey towards a more prosperous and resilient future. Explore AI-powered insights by clicking the ✨ buttons!
+                </p>
+            </section>
+
+            <section id="national-strategies" class="mb-12">
+                <h2 class="section-title">Overarching National Strategies</h2>
+                <p class="mb-6 text-gray-700">PNG's infrastructure development is guided by ambitious national plans aiming for transformative economic and social growth. These strategies outline key priorities and targets to address long-standing deficits.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="stat-card">
+                        <h3 class="stat-title">MTDP IV Economic Goal</h3>
+                        <p class="stat-value">K200 Billion</p>
+                        <p class="stat-context">Target GDP by 2030 under Medium Term Development Plan IV.</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 class="stat-title">Connect PNG: New Roads</h3>
+                        <p class="stat-value">2,500 km</p>
+                        <p class="stat-context">Target for new road construction by 2027 (Phase 1).</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 class="stat-title">Digital ID: GDP Impact</h3>
+                        <p class="stat-value">3-5%</p>
+                        <p class="stat-context">Projected GDP increase in 3-5 years from SevisPass Digital ID.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="telecom" class="mb-12">
+                <h2 class="section-title">Telecommunications & ICT</h2>
+                <p class="mb-6 text-gray-700">The ICT sector is crucial for PNG's development, with efforts focused on increasing connectivity, affordability, and leveraging digital transformation. However, significant gaps remain, particularly in rural access and cost.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="stat-card">
+                        <h3 class="stat-title">Internet Penetration</h3>
+                        <div class="chart-container h-64 md:h-72"><canvas id="internetPenetrationChart"></canvas></div>
+                        <p class="stat-context text-center mt-2">~24.1% of population (Early 2025, DataReportal)</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 class="stat-title">Mobile Connections</h3>
+                        <div class="chart-container h-64 md:h-72"><canvas id="mobileConnectionsChart"></canvas></div>
+                        <p class="stat-context text-center mt-2">~47.2% of population (Early 2025, DataReportal/GSMA)</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 class="stat-title">Internet Affordability Challenge</h3>
+                        <div class="chart-container h-64 md:h-72"><canvas id="internetAffordabilityChart"></canvas></div>
+                        <p class="stat-context text-center mt-2">Low-consumption basket vs. GNI per capita (2024).</p>
+                    </div>
+                    <div class="stat-card md:col-span-2 lg:col-span-3">
+                        <h3 class="stat-title">Key ICT Infrastructure & Initiatives</h3>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li><span class="icon-placeholder">📡</span><strong>Submarine Cables (CSCS2, KSCN):</strong> Aiming to reduce costs and improve international/domestic bandwidth. KSCN repairs ongoing after 2022 earthquake.</li>
+                            <li><span class="icon-placeholder">🗼</span><strong>National Transmission Network (NTN):</strong> Over 12,000 km of fibre by PNG DataCo, plus 500 new mobile towers planned by 2026.</li>
+                            <li><span class="icon-placeholder">📱</span><strong>Market Competition:</strong> Three MNOs (Digicel, Vodafone, Telikom/Bmobile). Starlink licensed, but entry faced judicial review.</li>
+                            <li><span class="icon-placeholder">💡</span><strong>Digital Government Plan 2023-2027:</strong> Includes SevisPass Digital ID, G2B Single Window, eProcurement.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="transport" class="mb-12">
+                <h2 class="section-title">Transport Infrastructure</h2>
+                <p class="mb-6 text-gray-700">Transport is vital for PNG's connectivity and economy. Ambitious programs like "Connect PNG" aim to address vast road network deficiencies, while ports and aviation sectors are also seeing significant upgrades.</p>
+                
+                <h3 class="text-2xl font-semibold mb-4 mt-8 text-[#118AB2]">Roads & Bridges</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="stat-card">
+                        <h3 class="stat-title">Road Network Condition</h3>
+                        <div class="chart-container h-64 md:h-72"><canvas id="roadConditionChart"></canvas></div>
+                        <p class="stat-context text-center mt-2">Estimated 85% in poor condition.</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 class="stat-title">Maintenance Backlog</h3>
+                        <p class="stat-value">K45 Billion</p>
+                        <p class="stat-context">Estimated cost to address deferred road maintenance.</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 class="stat-title">Connect PNG: Strategic Highway Upgrades</h3>
+                        <div class="chart-container h-64 md:h-72"><canvas id="connectPngProgressChart"></canvas></div>
+                        <p class="stat-context text-center mt-2">Progress on 16,200km strategic highways (Phase 1 target: 4,220km).</p>
+                        <button class="gemini-button" onclick="fetchGeminiData('connectPNG', 'risksOpportunities', 'geminiResponseConnectPNG')">✨ Analyse Risks & Opportunities</button>
+                        <div id="geminiResponseConnectPNG" class="gemini-response-area" style="display: none;"></div>
+                    </div>
+                </div>
+
+                <h3 class="text-2xl font-semibold mb-4 mt-8 text-[#118AB2]">Ports & Maritime</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="stat-card">
+                        <h3 class="stat-title">Kimbe Port Upgrade (AIFFP)</h3>
+                        <p class="stat-value">$95 Million AUD</p>
+                        <p class="stat-context">Australian funding for major upgrade, part of PNG Ports Infrastructure Investment Programme.</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 class="stat-title">Port Modernisation</h3>
+                         <p class="text-gray-700"><span class="icon-placeholder">🚢</span>Port Moresby (MIT) & Lae (SPICT) operated by ICTSI, showing improved performance and efficiency gains (e.g., 6x productivity at Lae with new cranes).</p>
+                         <p class="text-gray-700 mt-2"><span class="icon-placeholder">🇪🇺</span>EU developing major investment for Rabaul port renovation and greening.</p>
+                    </div>
+                </div>
+
+                <h3 class="text-2xl font-semibold mb-4 mt-8 text-[#118AB2]">Aviation</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="stat-card">
+                        <h3 class="stat-title">Civil Aviation Development (CADIP)</h3>
+                        <p class="stat-value">K1.67 Billion</p>
+                        <p class="stat-context">Largest aviation investment, primarily ADB-funded, for airport infrastructure upgrades.</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 class="stat-title">Air Niugini Re-fleeting</h3>
+                        <p class="stat-value">NZ$2 Billion</p>
+                        <p class="stat-context">Investment for 2025-2028, acquiring 11 Airbus A220s & 2 Boeing 787s (under review).</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="energy" class="mb-12">
+                <h2 class="section-title">Energy Infrastructure</h2>
+                <p class="mb-6 text-gray-700">Access to reliable and affordable electricity is a critical challenge. PNG aims to increase access significantly and shift towards renewable energy, but the state utility PPL faces major operational and financial hurdles.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="stat-card">
+                        <h3 class="stat-title">On-Grid Electricity Access</h3>
+                        <div class="chart-container h-64 md:h-72"><canvas id="electricityAccessChart"></canvas></div>
+                        <p class="stat-context text-center mt-2">Below 15% of population. Target: 70% by 2030.</p>
+                        <button class="gemini-button" onclick="fetchGeminiData('lowEnergyAccess', 'innovativeSolutions', 'geminiResponseEnergyAccess')">✨ Suggest Innovative Solutions</button>
+                        <div id="geminiResponseEnergyAccess" class="gemini-response-area" style="display: none;"></div>
+                    </div>
+                    <div class="stat-card">
+                        <h3 class="stat-title">Generation Mix (On-Grid, ~580-600MW Total)</h3 >
+                        <div class="chart-container h-64 md:h-72"><canvas id="generationMixChart"></canvas></div>
+                        <p class="stat-context text-center mt-2">Dominated by Hydropower and Diesel. Aim: 78% renewables by 2030.</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 class="stat-title">PNG Power Ltd (PPL) Loss</h3>
+                        <p class="stat-value">K271.79 Million</p>
+                        <p class="stat-context">Loss after tax in 2022, highlighting financial challenges.</p>
+                    </div>
+                     <div class="stat-card md:col-span-2 lg:col-span-3">
+                        <h3 class="stat-title">Key Energy Initiatives & Projects</h3>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li><span class="icon-placeholder">💡</span><strong>World Bank NEAT Project (US$204m):</strong> To boost energy access, expand renewables, modernise infrastructure.</li>
+                            <li><span class="icon-placeholder">💧</span><strong>ADB Support:</strong> Hydropower rehabilitation, mini-grids, Sustainable Energy Sector Development Programme.</li>
+                            <li><span class="icon-placeholder">☀️</span><strong>Renewable Focus:</strong> Planned projects include Naoro Brown & Ramu 2 hydro, Edevu hydro, Markham Valley solar & biomass.</li>
+                            <li><span class="icon-placeholder">🔧</span><strong>PPL Reforms:</strong> KCH planning restructure, NEA now regulatory body. Significant investment needed for plant/network upgrades.</li>
+                        </ul>
+                        <button class="gemini-button" onclick="fetchGeminiData('majorRenewableProject', 'risksOpportunities', 'geminiResponseRenewableProject')">✨ Analyse Major Renewable Project R&O</button>
+                        <div id="geminiResponseRenewableProject" class="gemini-response-area" style="display: none;"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="wash" class="mb-12">
+                <h2 class="section-title">Water, Sanitation & Hygiene (WASH)</h2>
+                <p class="mb-6 text-gray-700">Access to safe water and sanitation remains critically low, posing significant public health challenges. Efforts are underway to improve services, but issues like low investment, aging infrastructure, and cost recovery persist.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="stat-card">
+                        <h3 class="stat-title">Access to Improved Drinking Water</h3>
+                        <div class="chart-container h-64 md:h-72"><canvas id="waterAccessChart"></canvas></div>
+                        <p class="stat-context text-center mt-2">Less than 50% of households (DHS 2016-18).</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 class="stat-title">Access to Improved Sanitation</h3>
+                        <div class="chart-container h-64 md:h-72"><canvas id="sanitationAccessChart"></canvas></div>
+                        <p class="stat-context text-center mt-2">Only 29% of households (DHS 2016-18).</p>
+                        <button class="gemini-button" onclick="fetchGeminiData('lowSanitationAccess', 'innovativeSolutions', 'geminiResponseSanitation')">✨ Suggest Innovative Solutions</button>
+                        <div id="geminiResponseSanitation" class="gemini-response-area" style="display: none;"></div>
+                    </div>
+                    <div class="stat-card">
+                        <h3 class="stat-title">Water PNG: Non-Revenue Water</h3>
+                         <p class="stat-value">~52%</p>
+                        <p class="stat-context">High NRW due to leaks, illegal connections, aging infrastructure.</p>
+                    </div>
+                    <div class="stat-card md:col-span-2 lg:col-span-3">
+                        <h3 class="stat-title">Key WASH Initiatives & Challenges</h3>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li><span class="icon-placeholder">💧</span><strong>World Bank WSSDP (US$70m):</strong> Upgrading water supply in provincial/district towns (e.g., Bialla, Bulolo).</li>
+                            <li><span class="icon-placeholder">📜</span><strong>National WaSH Policy (2015) & Roadmap for WASH in Healthcare (2023-2030):</strong> Guiding frameworks.</li>
+                            <li><span class="icon-placeholder">💸</span><strong>Challenges:</strong> Low investment, aging infrastructure, culture of non-payment, land tenure disputes, governance issues, climate impacts.</li>
+                            <li><span class="icon-placeholder">🏙️</span><strong>Water PNG Plans (2025):</strong> Improve Port Moresby supply, new clarifier, potential Edevu Treatment Plant (PPP).</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="cross-cutting" class="mb-12">
+                <h2 class="section-title">Cross-Cutting Enablers & Themes</h2>
+                <p class="mb-6 text-gray-700">Several overarching factors influence PNG's ability to develop and maintain its infrastructure, including funding mechanisms, climate resilience, and the performance of state-owned enterprises.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="stat-card">
+                        <h3 class="stat-title">Infrastructure Funding (2025 Budget)</h3>
+                        <p class="stat-value">K7.6 Billion</p>
+                        <p class="stat-context">Announced for infrastructure development, a 273% increase from 2018.</p>
+                         <p class="text-sm text-gray-700 mt-4">Significant international partnerships (ADB, World Bank, Australia/AIFFP, EU, China) are crucial for financing major projects.</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <h3 class="stat-title">Climate Change & Resilience</h3>
+                        <p class="text-gray-700"><span class="icon-placeholder">🌍</span>PNG is acutely vulnerable. National Adaptation Plan (NAP) prioritises transport & infrastructure.</p>
+                        <p class="text-gray-700 mt-2"><span class="icon-placeholder">🛣️</span>DoWH Corporate Plan & Connect PNG include climate-resilient road standards.</p>
+                        <p class="text-gray-700 mt-2"><span class="icon-placeholder">💧</span>Focus on renewable energy and resilient port/WASH projects.</p>
+                        <p class="stat-context mt-2">Challenge: Integrating resilience comprehensively and addressing data/capacity gaps.</p>
+                    </div>
+                </div>
+                <div class="stat-card mt-6">
+                    <h3 class="stat-title text-center">SOE Reform: Kumul Consolidated Holdings (KCH) Oversight</h3>
+                    <div class="flex flex-col items-center space-y-2 md:space-y-0 md:flex-row md:justify-around md:items-start mt-4">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="flowchart-step mb-2">SOE Ownership Policy (2020) & KCH Act Amendment (2021)</div>
+                            <div class="flowchart-arrow hidden md:block transform rotate-90 md:rotate-0">→</div>
+                            <div class="flowchart-arrow md:hidden">↓</div>
+                        </div>
+                        <div class="flex flex-col items-center text-center">
+                            <div class="bg-[#FFD166] text-[#073B4C] p-4 rounded-lg shadow flowchart-step mb-2">
+                                Kumul Consolidated Holdings (KCH)
+                                <p class="text-xs">(Primary Oversight for SOEs)</p>
+                            </div>
+                            <div class="flowchart-arrow hidden md:block transform rotate-90 md:rotate-0">→</div>
+                            <div class="flowchart-arrow md:hidden">↓</div>
+                        </div>
+                        <div class="flowchart-step">
+                            SOEs (Air Niugini, Telikom, PPL, PNG Ports, Water PNG etc.)
+                            <p class="text-xs">Develop 3-yr Corporate Plans, Restructuring Strategies</p>
+                        </div>
+                    </div>
+                    <p class="stat-context text-center mt-4">Aim: Transform SOEs into profitable, efficient service providers with good governance.</p>
+                </div>
+            </section>
+
+            <section id="conclusion" class="mb-12">
+                <h2 class="section-title">Conclusion: Opportunities, Risks & The Path Forward</h2>
+                <p class="mb-6 text-gray-700">PNG is at a critical juncture. Ambitious strategies and international support offer significant opportunities, but substantial risks related to funding, governance, capacity, and climate change must be managed to ensure sustainable infrastructure development and improve citizens' lives.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="stat-card bg-[#E6FFFA] border-l-4 border-[#06D6A0]">
+                        <h3 class="stat-title text-[#047857]">Key Opportunities</h3>
+                        <ul class="list-disc list-inside text-gray-700 space-y-1 mt-2">
+                            <li>Strategic National Programmes (Connect PNG, Digital Transformation).</li>
+                            <li>SOE Reforms & strengthened PPP framework to attract private capital.</li>
+                            <li>Abundant Renewable Energy Potential (hydro, solar, geothermal).</li>
+                            <li>Strong International Partnerships providing finance & expertise.</li>
+                        </ul>
+                    </div>
+                    <div class="stat-card bg-[#FFF5F5] border-l-4 border-[#FF6B6B]">
+                        <h3 class="stat-title text-[#C53030]">Potential Risks</h3>
+                        <ul class="list-disc list-inside text-gray-700 space-y-1 mt-2">
+                            <li>Funding Sustainability & immense maintenance backlogs.</li>
+                            <li>Governance, transparency, and corruption concerns.</li>
+                            <li>Institutional and human capacity constraints.</li>
+                            <li>Complex land tenure issues delaying projects.</li>
+                            <li>High vulnerability to climate change and natural disasters.</li>
+                            <li>SOE underperformance and financial instability.</li>
+                            <li>Macroeconomic volatility and security issues.</li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="mt-8 text-lg text-center text-gray-800">
+                    The path forward requires steadfast commitment to strategic frameworks, robust governance, transparent procurement, and a clear focus on long-term sustainability and equitable benefit distribution for all citizens.
+                </p>
+            </section>
+            
+        </main>
+
+        <footer class="bg-[#073B4C] text-white py-6 mt-12">
+            <div class="container mx-auto px-4 text-center">
+                <p class="text-sm">© 2025 PNG Infrastructure Infographic. Data based on "INFRASTRUCTURE CHALLENGES FOR PAPUA NEW GUINEA’S FUTURE: AN UPDATED ASSESSMENT (Post-2015 Developments)".</p>
+                <p class="text-xs mt-1">This is a visual representation and interpretation of complex data for illustrative purposes. AI-generated content requires verification.</p>
+            </div>
+        </footer>
+
+        <div id="geminiModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center" style="display: none;"> <!-- z-index is in <style> -->
+            <div class="bg-white p-6 rounded-lg shadow-xl w-11/12 md:max-w-md mx-auto">
+                <h3 id="geminiModalTitle" class="text-lg font-semibold mb-3 text-[#073B4C]">Loading...</h3>
+                <div id="geminiModalContent" class="text-sm text-gray-700 max-h-60 overflow-y-auto"></div>
+                <button id="geminiModalClose" class="mt-4 bg-[#118AB2] text-white px-4 py-2 rounded hover:bg-[#0F789D] w-full">Close</button>
+            </div>
+        </div>
+    </div> <!-- End of wrapper div -->
+    """
+
+
+    # JavaScript content - API key will be injected into this string
+    # Note: Ensure all getElementById calls have null checks or are confirmed to exist.
+    # window.fetchGeminiData makes the function globally available for inline onclick="" attributes.
+    script_content_template = """
+        function wrapLabel(label, maxWidth = 16) {
+            if (typeof label !== 'string' || label.length <= maxWidth) {
+                return label;
+            }
+            const words = label.split(' ');
+            let currentLine = '';
+            const lines = [];
+            for (const word of words) {
+                if ((currentLine + word).length > maxWidth && currentLine.length > 0) {
+                    lines.push(currentLine.trim());
+                    currentLine = '';
+                }
+                currentLine += word + ' ';
+            }
+            if (currentLine.trim().length > 0) {
+                lines.push(currentLine.trim());
+            }
+            return lines.length > 0 ? lines : [label];
+        }
+
+        const defaultChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        color: '#073B4C',
+                        font: { size: 10 }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            if (!item || !item.chart || !item.chart.data || !item.chart.data.labels || typeof item.dataIndex === 'undefined') return '';
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                              return label.join(' ');
+                            }
+                            return label;
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    ticks: { color: '#073B4C', font: { size: 10 } },
+                    grid: { color: '#E2E8F0' }
+                },
+                x: {
+                    ticks: { color: '#073B4C', font: { size: 10 } },
+                    grid: { display: false }
+                }
+            }
+        };
+
+        const energeticPlayfulPalette = {
+            coralRed: '#FF6B6B',
+            sunnyYellow: '#FFD166',
+            tealishGreen: '#06D6A0',
+            ceruleanBlue: '#118AB2',
+            darkSlateBlue: '#073B4C',
+            lightGray: '#F8F9FA'
+        };
+        
+        // Function to initialize charts to ensure DOM is ready
+        function initializeCharts() {
+            const internetCtx = document.getElementById('internetPenetrationChart')?.getContext('2d');
+            if (internetCtx) {
+                new Chart(internetCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Internet Users', 'Offline Population'],
+                        datasets: [{
+                            label: 'Internet Penetration',
+                            data: [24.1, 100 - 24.1],
+                            backgroundColor: [energeticPlayfulPalette.ceruleanBlue, energeticPlayfulPalette.lightGray],
+                            borderColor: [energeticPlayfulPalette.ceruleanBlue, energeticPlayfulPalette.lightGray],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {...defaultChartOptions, cutout: '70%'}
+                });
+            }
+
+            const mobileCtx = document.getElementById('mobileConnectionsChart')?.getContext('2d');
+            if (mobileCtx) {
+                new Chart(mobileCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Mobile Connections', 'No Connection'],
+                        datasets: [{
+                            label: 'Mobile Connections',
+                            data: [47.2, 100 - 47.2],
+                            backgroundColor: [energeticPlayfulPalette.tealishGreen, energeticPlayfulPalette.lightGray],
+                            borderColor: [energeticPlayfulPalette.tealishGreen, energeticPlayfulPalette.lightGray],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {...defaultChartOptions, cutout: '70%'}
+                });
+            }
+            
+            const affordabilityCtx = document.getElementById('internetAffordabilityChart')?.getContext('2d');
+            if (affordabilityCtx) {
+                new Chart(affordabilityCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: [wrapLabel('PNG Cost (% GNI per capita)'), wrapLabel('Target Cost (% GNI per capita)')],
+                        datasets: [{
+                            label: 'Internet Basket Cost',
+                            data: [12.04, 2], 
+                            backgroundColor: [energeticPlayfulPalette.coralRed, energeticPlayfulPalette.sunnyYellow],
+                            borderColor: [energeticPlayfulPalette.coralRed, energeticPlayfulPalette.sunnyYellow],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        ...defaultChartOptions,
+                        indexAxis: 'y',
+                         scales: {
+                            x: { 
+                                ticks: { color: '#073B4C', font: {size: 10}, callback: function(value) { return value + '%' } },
+                                grid: { color: '#E2E8F0' }
+                            },
+                            y: { ticks: { color: '#073B4C', font: {size: 10} }, grid: {display: false} }
+                        },
+                        plugins: {
+                            ...defaultChartOptions.plugins,
+                            tooltip: {
+                                callbacks: {
+                                     title: function(tooltipItems) { 
+                                        const item = tooltipItems[0];
+                                        if (!item || !item.chart || !item.chart.data || !item.chart.data.labels || typeof item.dataIndex === 'undefined') return '';
+                                        let label = item.chart.data.labels[item.dataIndex];
+                                        if (Array.isArray(label)) { return label.join(' '); }
+                                        return label;
+                                    },
+                                    label: function(context) {
+                                        return context.dataset.label + ': ' + context.raw + '%';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            const roadConditionCtx = document.getElementById('roadConditionChart')?.getContext('2d');
+            if (roadConditionCtx) {
+                new Chart(roadConditionCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Poor Condition', 'Fair/Good Condition'],
+                        datasets: [{
+                            label: 'Road Network Condition',
+                            data: [85, 15],
+                            backgroundColor: [energeticPlayfulPalette.coralRed, energeticPlayfulPalette.tealishGreen],
+                            borderColor: [energeticPlayfulPalette.coralRed, energeticPlayfulPalette.tealishGreen],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {...defaultChartOptions, cutout: '70%'}
+                });
+            }
+
+            const connectPngProgressCtx = document.getElementById('connectPngProgressChart')?.getContext('2d');
+            if (connectPngProgressCtx) {
+                new Chart(connectPngProgressCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: [wrapLabel('Upgraded Strategic Highways (km)')],
+                        datasets: [
+                            {
+                                label: 'Achieved',
+                                data: [3500], 
+                                backgroundColor: energeticPlayfulPalette.ceruleanBlue,
+                            },
+                            {
+                                label: 'Phase 1 Target Remaining', 
+                                data: [4220 - 3500], 
+                                backgroundColor: energeticPlayfulPalette.lightGray,
+                            }
+                        ]
+                    },
+                    options: {
+                        ...defaultChartOptions,
+                        indexAxis: 'y',
+                        scales: {
+                            x: { stacked: true, ticks: { color: '#073B4C', font: {size: 10} }, grid: { color: '#E2E8F0' } },
+                            y: { stacked: true, ticks: { color: '#073B4C', font: {size: 10} }, grid: {display: false} }
+                        },
+                        plugins: {
+                            ...defaultChartOptions.plugins,
+                            tooltip: {
+                                callbacks: {
+                                    title: function(tooltipItems) { 
+                                        const item = tooltipItems[0];
+                                        if (!item || !item.chart || !item.chart.data || !item.chart.data.labels || typeof item.dataIndex === 'undefined') return '';
+                                        let label = item.chart.data.labels[item.dataIndex];
+                                        if (Array.isArray(label)) { return label.join(' '); }
+                                        return label;
+                                    },
+                                    label: function(context) {
+                                        return context.dataset.label + ': ' + context.raw.toLocaleString() + ' km';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            
+            const electricityAccessCtx = document.getElementById('electricityAccessChart')?.getContext('2d');
+            if (electricityAccessCtx) {
+                new Chart(electricityAccessCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['On-Grid Access', 'No On-Grid Access'],
+                        datasets: [{
+                            label: 'Electricity Access',
+                            data: [15, 85], 
+                            backgroundColor: [energeticPlayfulPalette.sunnyYellow, energeticPlayfulPalette.lightGray],
+                            borderColor: [energeticPlayfulPalette.sunnyYellow, energeticPlayfulPalette.lightGray],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {...defaultChartOptions, cutout: '70%'}
+                });
+            }
+
+            const generationMixCtx = document.getElementById('generationMixChart')?.getContext('2d');
+            if (generationMixCtx) {
+                new Chart(generationMixCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Hydropower (39.7%)', 'Diesel (37.4%)', 'Fossil Gas (14.1%)', 'Geothermal (9.1%)', 'Solar (~1%)'],
+                        datasets: [{
+                            label: 'On-Grid Generation Mix',
+                            data: [39.7, 37.4, 14.1, 9.1, 1], 
+                            backgroundColor: [
+                                energeticPlayfulPalette.ceruleanBlue,
+                                energeticPlayfulPalette.coralRed,
+                                energeticPlayfulPalette.darkSlateBlue,
+                                energeticPlayfulPalette.sunnyYellow,
+                                energeticPlayfulPalette.tealishGreen
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {...defaultChartOptions, 
+                        plugins: {
+                            ...defaultChartOptions.plugins,
+                            legend: { position: 'right', labels: {color: '#073B4C', font: {size:9}, boxWidth:15}}
+                        }
+                    }
+                });
+            }
+
+            const waterAccessCtx = document.getElementById('waterAccessChart')?.getContext('2d');
+            if (waterAccessCtx) {
+                new Chart(waterAccessCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Improved Water', 'Unimproved/Surface Water'],
+                        datasets: [{
+                            label: 'Access to Improved Drinking Water',
+                            data: [45, 55], 
+                            backgroundColor: [energeticPlayfulPalette.ceruleanBlue, energeticPlayfulPalette.lightGray],
+                            borderColor: [energeticPlayfulPalette.ceruleanBlue, energeticPlayfulPalette.lightGray],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {...defaultChartOptions, cutout: '70%'}
+                });
+            }
+
+            const sanitationAccessCtx = document.getElementById('sanitationAccessChart')?.getContext('2d');
+            if (sanitationAccessCtx) {
+                new Chart(sanitationAccessCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Improved Sanitation', 'Unimproved/Open Defecation'],
+                        datasets: [{
+                            label: 'Access to Improved Sanitation',
+                            data: [29, 71], 
+                            backgroundColor: [energeticPlayfulPalette.tealishGreen, energeticPlayfulPalette.lightGray],
+                            borderColor: [energeticPlayfulPalette.tealishGreen, energeticPlayfulPalette.lightGray],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {...defaultChartOptions, cutout: '70%'}
+                });
+            }
+        }
+
+        // Call initializeCharts after the DOM is fully loaded
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeCharts);
+        } else {
+            initializeCharts(); // DOMContentLoaded has already fired
+        }
+
+
+        // Gemini API Integration
+        const geminiModal = document.getElementById('geminiModal');
+        const geminiModalTitle = document.getElementById('geminiModalTitle');
+        const geminiModalContent = document.getElementById('geminiModalContent');
+        const geminiModalClose = document.getElementById('geminiModalClose');
+
+        if (geminiModalClose) {
+            geminiModalClose.addEventListener('click', () => {
+                if (geminiModal) geminiModal.style.display = 'none';
+            });
+        }
+
+        function showGeminiModal(title, content) {
+            if (geminiModalTitle) geminiModalTitle.textContent = title;
+            if (geminiModalContent) geminiModalContent.innerHTML = content.replace(/\\n/g, '<br>'); // Basic formatting for newlines
+            if (geminiModal) geminiModal.style.display = 'flex';
+        }
+        
+        window.fetchGeminiData = async function(context, type, responseElementId) {
+            const responseElement = document.getElementById(responseElementId);
+            if (responseElement) {
+                 responseElement.style.display = 'none'; // Hide previous response
+                 responseElement.innerHTML = ''; // Clear previous content
+            }
+            showGeminiModal('✨ AI Assistant Loading...', 'Fetching insights from Gemini API. Please wait...');
+
+            let prompt = "";
+            if (type === 'risksOpportunities') {
+                if (context === 'connectPNG') {
+                    prompt = "You are an infrastructure development analyst. For a large-scale national road connectivity program like 'Connect PNG' in Papua New Guinea, which aims to connect various regions and stimulate economic activity, briefly list 3 potential key risks and 3 potential key opportunities. Focus on socio-economic and logistical aspects relevant to PNG's context. Present as bullet points under 'Risks:' and 'Opportunities:' headings.";
+                } else if (context === 'majorRenewableProject') {
+                    prompt = "You are an energy project analyst. For a major new renewable energy project (e.g., large hydropower or solar farm) in Papua New Guinea, briefly list 3 potential key risks and 3 potential key opportunities. Consider environmental, social, technical, and financial aspects relevant to PNG. Present as bullet points under 'Risks:' and 'Opportunities:' headings.";
+                }
+            } else if (type === 'innovativeSolutions') {
+                if (context === 'lowEnergyAccess') {
+                    prompt = "You are a sustainable development expert. For Papua New Guinea, where on-grid electricity access is below 15%, suggest 3 innovative and context-appropriate solutions or strategies to significantly improve rural and remote electricity access, beyond traditional grid expansion. Focus on sustainability and community involvement. Present as a numbered list with brief explanations.";
+                } else if (context === 'lowSanitationAccess') {
+                    prompt = "You are a public health and WASH (Water, Sanitation, Hygiene) specialist. For Papua New Guinea, where access to improved sanitation is very low (around 29%), suggest 3 innovative and culturally sensitive solutions or strategies to significantly improve sanitation coverage, particularly in rural and peri-urban areas. Focus on sustainability, community participation, and health impact. Present as a numbered list with brief explanations.";
+                }
+            }
+
+            if (!prompt) {
+                showGeminiModal('Error', 'Invalid context for Gemini API call.');
+                return;
+            }
+            
+            const apiKey = "%s"; // API Key will be injected here by Python
+            if (!apiKey || apiKey === "YOUR_GEMINI_API_KEY_PLACEHOLDER" || apiKey === "") { // Check if placeholder or empty
+                 showGeminiModal('API Key Error', 'Gemini API key is not configured. Please ensure it is set up in Streamlit secrets (if deployed) or provided in the sidebar (for local use) and refresh the page.');
+                 if (responseElement) responseElement.style.display = 'none';
+                 return;
+            }
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+            
+            const payload = {
+                contents: [{ role: "user", parts: [{ text: prompt }] }]
+            };
+
+            try {
+                const apiResponse = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!apiResponse.ok) {
+                    const errorData = await apiResponse.json();
+                    console.error('Gemini API Error:', errorData);
+                    let detailedMessage = (errorData.error && errorData.error.message) ? errorData.error.message : 'Unknown error. Check browser console for details.';
+                    showGeminiModal('AI Assistant Error', `Could not fetch insights. Status: ${apiResponse.status}. Message: ${detailedMessage}`);
+                    return;
+                }
+
+                const result = await apiResponse.json();
+                
+                let text = "No content generated or error in response structure.";
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0 &&
+                    typeof result.candidates[0].content.parts[0].text === 'string') { // Check if text exists
+                    text = result.candidates[0].content.parts[0].text;
+                } else if (result.candidates && result.candidates.length > 0 && result.candidates[0].finishReason && result.candidates[0].finishReason !== "STOP") {
+                    text = `Content generation stopped. Reason: ${result.candidates[0].finishReason}.`;
+                    if (result.candidates[0].safetyRatings) {
+                        text += ` Safety Ratings: ${JSON.stringify(result.candidates[0].safetyRatings)}`;
+                    }
+                } else {
+                     showGeminiModal('AI Assistant Response', 'Received an empty or malformed response from the AI. Check console for details.');
+                     console.log("Malformed AI Response:", result);
+                     return;
+                }
+                
+                if (responseElement) {
+                    responseElement.innerHTML = text.replace(/\\n/g, '<br>'); // Basic formatting
+                    responseElement.style.display = 'block';
+                }
+                if (geminiModal) geminiModal.style.display = 'none'; // Hide loading modal
+
+            } catch (error) {
+                console.error('Fetch error:', error);
+                showGeminiModal('Network Error', 'Could not connect to the AI assistant. Please check your internet connection and API key. Error: ' + error.message);
+            }
+        }
+    """ % gemini_api_key_js # Inject the API key into the JS string
+
+    # Full HTML content to be rendered
+    full_html = f"""
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <!-- Streamlit manages the page title, but including for completeness if HTML is used elsewhere -->
+            <title>Papua New Guinea: Infrastructure Challenges & Future Outlook</title>
+            <script src="https://cdn.tailwindcss.com"></script>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+            <style>
+                {style_content}
+            </style>
+        </head>
+        <body> <!-- Body tag is useful for structure, Streamlit injects into its own body -->
+            {body_content_html}
+            <script>
+                {script_content_template}
+            </script>
+        </body>
+    """
+    return full_html
+
+def main():
+    st.set_page_config(page_title="PNG Infrastructure Infographic", layout="wide")
+
+    # --- API Key Handling ---
+    gemini_api_key = ""
+    # Try to get API key from Streamlit secrets (for deployed app)
+    try:
+        gemini_api_key = st.secrets.get("GEMINI_API_KEY", "")
+    except Exception: # Handles cases where secrets are not configured (e.g. local run without secrets file)
+        pass
+
+    st.sidebar.header("API Configuration")
+    if not gemini_api_key:
+        st.sidebar.warning("Gemini API Key not found in Streamlit secrets.")
+        gemini_api_key_input = st.sidebar.text_input(
+            "Enter Gemini API Key for AI features:", 
+            type="password", 
+            value="",
+            help="Your API key is used to fetch live insights. It is not stored if entered here for local testing."
+        )
+        if gemini_api_key_input:
+            gemini_api_key = gemini_api_key_input
+        else:
+            st.sidebar.info("AI-powered insights (✨ buttons) will be disabled or show an error until a valid API key is provided and the page is refreshed/rerun.")
+    else:
+        st.sidebar.success("Gemini API Key loaded from secrets.")
+
+    # Information about API key and GitHub
+    st.sidebar.markdown("---")
+    st.sidebar.markdown(
+        "**Important for GitHub & Deployment:**\n"
+        "When deploying this app (e.g., on Streamlit Community Cloud from a GitHub repo):\n"
+        "1.  **Do NOT commit your API key directly into your `app.py` or any other file in your GitHub repository if it's public.**\n"
+        "2.  Store your `GEMINI_API_KEY` in the Streamlit app's secrets configuration on the deployment platform.\n\n"
+        "**For local development, you can:**\n"
+        "1. Use the input field above (key is not saved beyond the session).\n"
+        "2. Or, create a `.streamlit/secrets.toml` file in your project's root directory with your key:\n"
+        "   ```toml\n"
+        "   GEMINI_API_KEY = \"YOUR_ACTUAL_GEMINI_API_KEY\"\n"
+        "   ```"
+    )
+    st.sidebar.markdown("---")
+
+    # Render the main HTML content
+    # Pass the API key (even if empty, JS will handle it)
+    html_content = get_streamlit_app_content(gemini_api_key_js=gemini_api_key)
+    st.markdown(html_content, unsafe_allow_html=True)
+
+if __name__ == "__main__":
+    main()
