@@ -5,9 +5,6 @@ def get_streamlit_app_content(gemini_api_key_js):
     Generates the HTML, CSS, and JavaScript content for the Streamlit app.
     The Gemini API key is injected into the JavaScript part.
     """
-
-    # Minified versions of your provided CSS and JavaScript for brevity in this example
-    # In a real scenario, you'd paste your full CSS and JS here.
     
     style_content = """
         body {
@@ -168,7 +165,7 @@ def get_streamlit_app_content(gemini_api_key_js):
                     </div>
                     <div class="stat-card">
                         <h3 class="stat-title">Digital ID: GDP Impact</h3>
-                        <p class="stat-value">3-5%</p>
+                        <p class="stat-value">3-5%%</p> <!-- Escaped % -->
                         <p class="stat-context">Projected GDP increase in 3-5 years from SevisPass Digital ID.</p>
                     </div>
                 </div>
@@ -181,12 +178,12 @@ def get_streamlit_app_content(gemini_api_key_js):
                     <div class="stat-card">
                         <h3 class="stat-title">Internet Penetration</h3>
                         <div class="chart-container h-64 md:h-72"><canvas id="internetPenetrationChart"></canvas></div>
-                        <p class="stat-context text-center mt-2">~24.1% of population (Early 2025, DataReportal)</p>
+                        <p class="stat-context text-center mt-2">~24.1%% of population (Early 2025, DataReportal)</p> <!-- Escaped % -->
                     </div>
                     <div class="stat-card">
                         <h3 class="stat-title">Mobile Connections</h3>
                         <div class="chart-container h-64 md:h-72"><canvas id="mobileConnectionsChart"></canvas></div>
-                        <p class="stat-context text-center mt-2">~47.2% of population (Early 2025, DataReportal/GSMA)</p>
+                        <p class="stat-context text-center mt-2">~47.2%% of population (Early 2025, DataReportal/GSMA)</p> <!-- Escaped % -->
                     </div>
                     <div class="stat-card">
                         <h3 class="stat-title">Internet Affordability Challenge</h3>
@@ -214,7 +211,7 @@ def get_streamlit_app_content(gemini_api_key_js):
                     <div class="stat-card">
                         <h3 class="stat-title">Road Network Condition</h3>
                         <div class="chart-container h-64 md:h-72"><canvas id="roadConditionChart"></canvas></div>
-                        <p class="stat-context text-center mt-2">Estimated 85% in poor condition.</p>
+                        <p class="stat-context text-center mt-2">Estimated 85%% in poor condition.</p> <!-- Escaped % -->
                     </div>
                     <div class="stat-card">
                         <h3 class="stat-title">Maintenance Backlog</h3>
@@ -266,14 +263,14 @@ def get_streamlit_app_content(gemini_api_key_js):
                     <div class="stat-card">
                         <h3 class="stat-title">On-Grid Electricity Access</h3>
                         <div class="chart-container h-64 md:h-72"><canvas id="electricityAccessChart"></canvas></div>
-                        <p class="stat-context text-center mt-2">Below 15% of population. Target: 70% by 2030.</p>
+                        <p class="stat-context text-center mt-2">Below 15%% of population. Target: 70%% by 2030.</p> <!-- Escaped % -->
                         <button class="gemini-button" onclick="fetchGeminiData('lowEnergyAccess', 'innovativeSolutions', 'geminiResponseEnergyAccess')">✨ Suggest Innovative Solutions</button>
                         <div id="geminiResponseEnergyAccess" class="gemini-response-area" style="display: none;"></div>
                     </div>
                     <div class="stat-card">
                         <h3 class="stat-title">Generation Mix (On-Grid, ~580-600MW Total)</h3 >
                         <div class="chart-container h-64 md:h-72"><canvas id="generationMixChart"></canvas></div>
-                        <p class="stat-context text-center mt-2">Dominated by Hydropower and Diesel. Aim: 78% renewables by 2030.</p>
+                        <p class="stat-context text-center mt-2">Dominated by Hydropower and Diesel. Aim: 78%% renewables by 2030.</p> <!-- Escaped % -->
                     </div>
                     <div class="stat-card">
                         <h3 class="stat-title">PNG Power Ltd (PPL) Loss</h3>
@@ -301,18 +298,18 @@ def get_streamlit_app_content(gemini_api_key_js):
                     <div class="stat-card">
                         <h3 class="stat-title">Access to Improved Drinking Water</h3>
                         <div class="chart-container h-64 md:h-72"><canvas id="waterAccessChart"></canvas></div>
-                        <p class="stat-context text-center mt-2">Less than 50% of households (DHS 2016-18).</p>
+                        <p class="stat-context text-center mt-2">Less than 50%% of households (DHS 2016-18).</p> <!-- Escaped % -->
                     </div>
                     <div class="stat-card">
                         <h3 class="stat-title">Access to Improved Sanitation</h3>
                         <div class="chart-container h-64 md:h-72"><canvas id="sanitationAccessChart"></canvas></div>
-                        <p class="stat-context text-center mt-2">Only 29% of households (DHS 2016-18).</p>
+                        <p class="stat-context text-center mt-2">Only 29%% of households (DHS 2016-18).</p> <!-- Escaped % -->
                         <button class="gemini-button" onclick="fetchGeminiData('lowSanitationAccess', 'innovativeSolutions', 'geminiResponseSanitation')">✨ Suggest Innovative Solutions</button>
                         <div id="geminiResponseSanitation" class="gemini-response-area" style="display: none;"></div>
                     </div>
                     <div class="stat-card">
                         <h3 class="stat-title">Water PNG: Non-Revenue Water</h3>
-                         <p class="stat-value">~52%</p>
+                         <p class="stat-value">~52%%</p> <!-- Escaped % -->
                         <p class="stat-context">High NRW due to leaks, illegal connections, aging infrastructure.</p>
                     </div>
                     <div class="stat-card md:col-span-2 lg:col-span-3">
@@ -334,7 +331,7 @@ def get_streamlit_app_content(gemini_api_key_js):
                     <div class="stat-card">
                         <h3 class="stat-title">Infrastructure Funding (2025 Budget)</h3>
                         <p class="stat-value">K7.6 Billion</p>
-                        <p class="stat-context">Announced for infrastructure development, a 273% increase from 2018.</p>
+                        <p class="stat-context">Announced for infrastructure development, a 273%% increase from 2018.</p> <!-- Escaped % -->
                          <p class="text-sm text-gray-700 mt-4">Significant international partnerships (ADB, World Bank, Australia/AIFFP, EU, China) are crucial for financing major projects.</p>
                     </div>
 
@@ -421,11 +418,9 @@ def get_streamlit_app_content(gemini_api_key_js):
     </div> <!-- End of wrapper div -->
     """
 
-
     # JavaScript content - API key will be injected into this string
-    # Note: Ensure all getElementById calls have null checks or are confirmed to exist.
-    # window.fetchGeminiData makes the function globally available for inline onclick="" attributes.
-    script_content_template = """
+    # Literal % signs in JS are escaped as %% for Python's % formatting
+    script_content_js_template = """
         function wrapLabel(label, maxWidth = 16) {
             if (typeof label !== 'string' || label.length <= maxWidth) {
                 return label;
@@ -492,7 +487,6 @@ def get_streamlit_app_content(gemini_api_key_js):
             lightGray: '#F8F9FA'
         };
         
-        // Function to initialize charts to ensure DOM is ready
         function initializeCharts() {
             const internetCtx = document.getElementById('internetPenetrationChart')?.getContext('2d');
             if (internetCtx) {
@@ -508,7 +502,7 @@ def get_streamlit_app_content(gemini_api_key_js):
                             borderWidth: 1
                         }]
                     },
-                    options: {...defaultChartOptions, cutout: '70%'}
+                    options: {...defaultChartOptions, cutout: '70%%'} // Escaped %
                 });
             }
 
@@ -526,7 +520,7 @@ def get_streamlit_app_content(gemini_api_key_js):
                             borderWidth: 1
                         }]
                     },
-                    options: {...defaultChartOptions, cutout: '70%'}
+                    options: {...defaultChartOptions, cutout: '70%%'} // Escaped %
                 });
             }
             
@@ -535,7 +529,7 @@ def get_streamlit_app_content(gemini_api_key_js):
                 new Chart(affordabilityCtx, {
                     type: 'bar',
                     data: {
-                        labels: [wrapLabel('PNG Cost (% GNI per capita)'), wrapLabel('Target Cost (% GNI per capita)')],
+                        labels: [wrapLabel('PNG Cost (%% GNI per capita)'), wrapLabel('Target Cost (%% GNI per capita)')], // Escaped %
                         datasets: [{
                             label: 'Internet Basket Cost',
                             data: [12.04, 2], 
@@ -549,7 +543,7 @@ def get_streamlit_app_content(gemini_api_key_js):
                         indexAxis: 'y',
                          scales: {
                             x: { 
-                                ticks: { color: '#073B4C', font: {size: 10}, callback: function(value) { return value + '%' } },
+                                ticks: { color: '#073B4C', font: {size: 10}, callback: function(value) { return value + '%%' } }, // Escaped %
                                 grid: { color: '#E2E8F0' }
                             },
                             y: { ticks: { color: '#073B4C', font: {size: 10} }, grid: {display: false} }
@@ -566,7 +560,7 @@ def get_streamlit_app_content(gemini_api_key_js):
                                         return label;
                                     },
                                     label: function(context) {
-                                        return context.dataset.label + ': ' + context.raw + '%';
+                                        return context.dataset.label + ': ' + context.raw + '%%'; // Escaped %
                                     }
                                 }
                             }
@@ -589,7 +583,7 @@ def get_streamlit_app_content(gemini_api_key_js):
                             borderWidth: 1
                         }]
                     },
-                    options: {...defaultChartOptions, cutout: '70%'}
+                    options: {...defaultChartOptions, cutout: '70%%'} // Escaped %
                 });
             }
 
@@ -654,7 +648,7 @@ def get_streamlit_app_content(gemini_api_key_js):
                             borderWidth: 1
                         }]
                     },
-                    options: {...defaultChartOptions, cutout: '70%'}
+                    options: {...defaultChartOptions, cutout: '70%%'} // Escaped %
                 });
             }
 
@@ -662,8 +656,8 @@ def get_streamlit_app_content(gemini_api_key_js):
             if (generationMixCtx) {
                 new Chart(generationMixCtx, {
                     type: 'pie',
-                    data: {
-                        labels: ['Hydropower (39.7%)', 'Diesel (37.4%)', 'Fossil Gas (14.1%)', 'Geothermal (9.1%)', 'Solar (~1%)'],
+                    data: { // Escaped % in labels
+                        labels: ['Hydropower (39.7%%)', 'Diesel (37.4%%)', 'Fossil Gas (14.1%%)', 'Geothermal (9.1%%)', 'Solar (~1%%)'],
                         datasets: [{
                             label: 'On-Grid Generation Mix',
                             data: [39.7, 37.4, 14.1, 9.1, 1], 
@@ -700,7 +694,7 @@ def get_streamlit_app_content(gemini_api_key_js):
                             borderWidth: 1
                         }]
                     },
-                    options: {...defaultChartOptions, cutout: '70%'}
+                    options: {...defaultChartOptions, cutout: '70%%'} // Escaped %
                 });
             }
 
@@ -718,20 +712,17 @@ def get_streamlit_app_content(gemini_api_key_js):
                             borderWidth: 1
                         }]
                     },
-                    options: {...defaultChartOptions, cutout: '70%'}
+                    options: {...defaultChartOptions, cutout: '70%%'} // Escaped %
                 });
             }
         }
 
-        // Call initializeCharts after the DOM is fully loaded
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', initializeCharts);
         } else {
-            initializeCharts(); // DOMContentLoaded has already fired
+            initializeCharts(); 
         }
 
-
-        // Gemini API Integration
         const geminiModal = document.getElementById('geminiModal');
         const geminiModalTitle = document.getElementById('geminiModalTitle');
         const geminiModalContent = document.getElementById('geminiModalContent');
@@ -745,15 +736,15 @@ def get_streamlit_app_content(gemini_api_key_js):
 
         function showGeminiModal(title, content) {
             if (geminiModalTitle) geminiModalTitle.textContent = title;
-            if (geminiModalContent) geminiModalContent.innerHTML = content.replace(/\\n/g, '<br>'); // Basic formatting for newlines
+            if (geminiModalContent) geminiModalContent.innerHTML = content.replace(/\\n/g, '<br>'); 
             if (geminiModal) geminiModal.style.display = 'flex';
         }
         
         window.fetchGeminiData = async function(context, type, responseElementId) {
             const responseElement = document.getElementById(responseElementId);
             if (responseElement) {
-                 responseElement.style.display = 'none'; // Hide previous response
-                 responseElement.innerHTML = ''; // Clear previous content
+                 responseElement.style.display = 'none'; 
+                 responseElement.innerHTML = ''; 
             }
             showGeminiModal('✨ AI Assistant Loading...', 'Fetching insights from Gemini API. Please wait...');
 
@@ -766,9 +757,9 @@ def get_streamlit_app_content(gemini_api_key_js):
                 }
             } else if (type === 'innovativeSolutions') {
                 if (context === 'lowEnergyAccess') {
-                    prompt = "You are a sustainable development expert. For Papua New Guinea, where on-grid electricity access is below 15%, suggest 3 innovative and context-appropriate solutions or strategies to significantly improve rural and remote electricity access, beyond traditional grid expansion. Focus on sustainability and community involvement. Present as a numbered list with brief explanations.";
+                    prompt = "You are a sustainable development expert. For Papua New Guinea, where on-grid electricity access is below 15%%, suggest 3 innovative and context-appropriate solutions or strategies to significantly improve rural and remote electricity access, beyond traditional grid expansion. Focus on sustainability and community involvement. Present as a numbered list with brief explanations."; // Escaped %
                 } else if (context === 'lowSanitationAccess') {
-                    prompt = "You are a public health and WASH (Water, Sanitation, Hygiene) specialist. For Papua New Guinea, where access to improved sanitation is very low (around 29%), suggest 3 innovative and culturally sensitive solutions or strategies to significantly improve sanitation coverage, particularly in rural and peri-urban areas. Focus on sustainability, community participation, and health impact. Present as a numbered list with brief explanations.";
+                    prompt = "You are a public health and WASH (Water, Sanitation, Hygiene) specialist. For Papua New Guinea, where access to improved sanitation is very low (around 29%%), suggest 3 innovative and culturally sensitive solutions or strategies to significantly improve sanitation coverage, particularly in rural and peri-urban areas. Focus on sustainability, community participation, and health impact. Present as a numbered list with brief explanations."; // Escaped %
                 }
             }
 
@@ -777,8 +768,9 @@ def get_streamlit_app_content(gemini_api_key_js):
                 return;
             }
             
-            const apiKey = "%s"; // API Key will be injected here by Python
-            if (!apiKey || apiKey === "YOUR_GEMINI_API_KEY_PLACEHOLDER" || apiKey === "") { // Check if placeholder or empty
+            // The '%s' here is the placeholder for Python to inject the API key
+            const apiKey = "%s"; 
+            if (!apiKey || apiKey === "YOUR_GEMINI_API_KEY_PLACEHOLDER" || apiKey === "") { 
                  showGeminiModal('API Key Error', 'Gemini API key is not configured. Please ensure it is set up in Streamlit secrets (if deployed) or provided in the sidebar (for local use) and refresh the page.');
                  if (responseElement) responseElement.style.display = 'none';
                  return;
@@ -810,7 +802,7 @@ def get_streamlit_app_content(gemini_api_key_js):
                 if (result.candidates && result.candidates.length > 0 &&
                     result.candidates[0].content && result.candidates[0].content.parts &&
                     result.candidates[0].content.parts.length > 0 &&
-                    typeof result.candidates[0].content.parts[0].text === 'string') { // Check if text exists
+                    typeof result.candidates[0].content.parts[0].text === 'string') { 
                     text = result.candidates[0].content.parts[0].text;
                 } else if (result.candidates && result.candidates.length > 0 && result.candidates[0].finishReason && result.candidates[0].finishReason !== "STOP") {
                     text = `Content generation stopped. Reason: ${result.candidates[0].finishReason}.`;
@@ -824,24 +816,28 @@ def get_streamlit_app_content(gemini_api_key_js):
                 }
                 
                 if (responseElement) {
-                    responseElement.innerHTML = text.replace(/\\n/g, '<br>'); // Basic formatting
+                    responseElement.innerHTML = text.replace(/\\n/g, '<br>'); 
                     responseElement.style.display = 'block';
                 }
-                if (geminiModal) geminiModal.style.display = 'none'; // Hide loading modal
+                if (geminiModal) geminiModal.style.display = 'none';
 
             } catch (error) {
                 console.error('Fetch error:', error);
                 showGeminiModal('Network Error', 'Could not connect to the AI assistant. Please check your internet connection and API key. Error: ' + error.message);
             }
         }
-    """ % gemini_api_key_js # Inject the API key into the JS string
+    """
+
+    # Inject the API key into the JS string template
+    # Ensure gemini_api_key_js is a string, even if empty
+    actual_script_content = script_content_js_template % (gemini_api_key_js if gemini_api_key_js is not None else "")
+
 
     # Full HTML content to be rendered
     full_html = f"""
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <!-- Streamlit manages the page title, but including for completeness if HTML is used elsewhere -->
             <title>Papua New Guinea: Infrastructure Challenges & Future Outlook</title>
             <script src="https://cdn.tailwindcss.com"></script>
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -850,62 +846,11 @@ def get_streamlit_app_content(gemini_api_key_js):
                 {style_content}
             </style>
         </head>
-        <body> <!-- Body tag is useful for structure, Streamlit injects into its own body -->
+        <body>
             {body_content_html}
             <script>
-                {script_content_template}
+                {actual_script_content}
             </script>
         </body>
     """
     return full_html
-
-def main():
-    st.set_page_config(page_title="PNG Infrastructure Infographic", layout="wide")
-
-    # --- API Key Handling ---
-    gemini_api_key = ""
-    # Try to get API key from Streamlit secrets (for deployed app)
-    try:
-        gemini_api_key = st.secrets.get("GEMINI_API_KEY", "")
-    except Exception: # Handles cases where secrets are not configured (e.g. local run without secrets file)
-        pass
-
-    st.sidebar.header("API Configuration")
-    if not gemini_api_key:
-        st.sidebar.warning("Gemini API Key not found in Streamlit secrets.")
-        gemini_api_key_input = st.sidebar.text_input(
-            "Enter Gemini API Key for AI features:", 
-            type="password", 
-            value="",
-            help="Your API key is used to fetch live insights. It is not stored if entered here for local testing."
-        )
-        if gemini_api_key_input:
-            gemini_api_key = gemini_api_key_input
-        else:
-            st.sidebar.info("AI-powered insights (✨ buttons) will be disabled or show an error until a valid API key is provided and the page is refreshed/rerun.")
-    else:
-        st.sidebar.success("Gemini API Key loaded from secrets.")
-
-    # Information about API key and GitHub
-    st.sidebar.markdown("---")
-    st.sidebar.markdown(
-        "**Important for GitHub & Deployment:**\n"
-        "When deploying this app (e.g., on Streamlit Community Cloud from a GitHub repo):\n"
-        "1.  **Do NOT commit your API key directly into your `app.py` or any other file in your GitHub repository if it's public.**\n"
-        "2.  Store your `GEMINI_API_KEY` in the Streamlit app's secrets configuration on the deployment platform.\n\n"
-        "**For local development, you can:**\n"
-        "1. Use the input field above (key is not saved beyond the session).\n"
-        "2. Or, create a `.streamlit/secrets.toml` file in your project's root directory with your key:\n"
-        "   ```toml\n"
-        "   GEMINI_API_KEY = \"YOUR_ACTUAL_GEMINI_API_KEY\"\n"
-        "   ```"
-    )
-    st.sidebar.markdown("---")
-
-    # Render the main HTML content
-    # Pass the API key (even if empty, JS will handle it)
-    html_content = get_streamlit_app_content(gemini_api_key_js=gemini_api_key)
-    st.markdown(html_content, unsafe_allow_html=True)
-
-if __name__ == "__main__":
-    main()
