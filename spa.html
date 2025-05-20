@@ -1,438 +1,378 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Papua New Guinea: Infrastructure Challenges & Future Outlook</title>
+    <title>Papua New Guinea Infrastructure: Challenges & Future</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!--
-    Infographic Narrative & Structure Plan:
-    (No changes to overall structure, Gemini features integrated within existing sections)
-
-    Color Palette Chosen: "Energetic & Playful"
-    (No changes to color palette)
-
-    Visualization Choices (Confirming NO SVG, NO MERMAID JS):
-    (No changes to visualization choices, Gemini features are text-based additions)
-
-    Neither Mermaid JS nor SVG will be used. All diagrams will be HTML/CSS or Canvas-based via Chart.js.
-    All data is sourced from the provided "INFRASTRUCTURE CHALLENGES FOR PAPUA NEW GUINEA’S FUTURE: AN UPDATED ASSESSMENT (Post-2015 Developments)" report.
-    Gemini API features added:
-    1. Analyse Project Risks & Opportunities (for Connect PNG, major energy projects).
-    2. Suggest Innovative Solutions (for low energy access, low sanitation coverage).
+    <!-- Application Structure Plan: 
+        1. Header: Title.
+        2. Navigation Bar: Links to key sections (National Vision, Sector Deep Dives for Transport, Energy, ICT, WASH, Cross-Cutting Themes, Path Forward).
+        3. Introduction Section: Brief overview of PNG's infrastructure challenge based on report intro.
+        4. National Vision & Strategies Section: MTDP IV goals, Connect PNG summary (stats, key corridors), Digital Transformation (SevisPass highlights).
+        5. Sector Deep Dive Section (Tabbed or Accordion for usability):
+            - Transport: Roads (condition, backlog), Ports (key upgrades), Aviation (key investments).
+            - Energy: Access rates, generation mix, PPL challenges.
+            - ICT: Penetration rates, affordability, key projects.
+            - WASH: Access rates, key challenges.
+        6. Cross-Cutting Themes Section: Funding (domestic/international, PPP focus), Climate Resilience (NAP, key vulnerabilities), SOE Reform (KCH role conceptual diagram).
+        7. The Path Forward Section: Opportunities, Risks, and key recommendations from the report.
+        8. Footer: Source attribution.
+        This structure is chosen to provide a clear, thematic exploration of the report's content, moving from high-level strategy to sectoral details, cross-cutting issues, and finally, the outlook. It prioritises user navigation and understanding over strictly mirroring the report's linear chapter flow.
+    -->
+    <!-- Visualization & Content Choices:
+        - MTDP IV Goals: Inform -> Big Number Stats (HTML/CSS) -> Quick overview of national ambition.
+        - Connect PNG Progress/Targets: Inform -> Big Number Stats / Progress Bar (HTML/CSS) -> Highlights scale and progress.
+        - Digital ID (SevisPass) Impact: Inform -> Big Number Stats (HTML/CSS) -> Shows potential of digital infra.
+        - Road Condition: Compare/Inform -> Donut Chart (Chart.js) -> Visualises poor state of roads.
+        - Road Maintenance Backlog: Inform -> Big Number Stat (HTML/CSS) -> Emphasises financial challenge.
+        - Energy Access: Compare/Inform -> Donut Chart (Chart.js) -> Shows low electrification.
+        - Energy Generation Mix: Compare -> Pie Chart (Chart.js) -> Illustrates reliance on different sources.
+        - ICT Penetration (Internet/Mobile): Compare/Inform -> Donut Charts (Chart.js) -> Shows digital divide.
+        - ICT Affordability: Compare -> Bar Chart (Chart.js) -> Highlights cost barrier.
+        - WASH Access (Water/Sanitation): Compare/Inform -> Donut Charts (Chart.js) -> Shows critical service gaps.
+        - Funding Sources (Illustrative): Compare -> Stacked Bar/Grouped Bar (Chart.js) -> Shows mix of funding (conceptual, data permitting).
+        - SOE Reform (KCH Oversight): Organize -> Simple Flowchart (HTML/CSS using Tailwind, Unicode arrows) -> Explains governance structure.
+        - Opportunities/Risks: Organize -> Styled Lists (HTML/CSS) -> Summarises key takeaways.
+        All textual content will be concise summaries derived from the report. Interactions will include navigation clicks and hovers for emphasis. No SVG/Mermaid.
     -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #F8F9FA;
-            color: #073B4C;
+            background-color: #FDFBF7; /* Warm Off-White */
+            color: #4A4A4A; /* Dark Grey */
         }
         .chart-container {
             position: relative;
             width: 100%;
-            max-width: 500px; 
+            max-width: 450px; /* Slightly smaller for better grid fit */
             margin-left: auto;
             margin-right: auto;
-            height: 300px; 
-            max-height: 350px;
+            height: 280px; 
+            max-height: 320px;
         }
         @media (min-width: 768px) {
             .chart-container {
-                height: 320px;
+                height: 300px;
             }
-        }
-        .stat-card {
-            background-color: white;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .stat-title {
-            font-size: 1.125rem; 
-            font-weight: 600; 
-            margin-bottom: 0.5rem;
-            color: #118AB2; 
-        }
-        .stat-value {
-            font-size: 2.25rem; 
-            font-weight: 700; 
-            color: #FF6B6B; 
-            line-height: 1.1;
-        }
-        .stat-context {
-            font-size: 0.875rem; 
-            color: #4A5568; 
-            margin-top: 0.25rem;
-        }
-        .section-title {
-            font-size: 1.875rem; 
-            font-weight: 700; 
-            color: #073B4C; 
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #118AB2; 
         }
         .nav-link {
             padding: 0.5rem 1rem;
-            color: #073B4C;
+            color: #4A4A4A;
             border-radius: 0.375rem;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-weight: 500;
         }
-        .nav-link:hover {
-            background-color: #E2E8F0; 
+        .nav-link:hover, .nav-link.active {
+            background-color: #D4A373; /* Earthy Tan */
+            color: #FDFBF7;
+        }
+        .section-title {
+            font-size: 1.75rem; /* text-2xl */
+            font-weight: 600; /* font-semibold */
+            color: #D4A373; /* Earthy Tan */
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #E76F51; /* Terracotta - subtle accent */
+        }
+        .card {
+            background-color: #FFFFFF;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.2s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-3px);
+        }
+        .stat-value {
+            font-size: 2.5rem; /* text-4xl */
+            font-weight: 700; /* font-bold */
+            color: #E76F51; /* Terracotta */
+            line-height: 1.1;
+        }
+        .stat-label {
+            font-size: 0.875rem; /* text-sm */
+            color: #A98467; /* Muted Brown */
+            margin-top: 0.25rem;
+        }
+        .tab-button {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: border-color 0.3s ease, color 0.3s ease;
+            font-weight: 500;
+        }
+        .tab-button.active {
+            border-color: #E76F51; /* Terracotta */
+            color: #D4A373; /* Earthy Tan */
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
         }
         .flowchart-step {
-            border: 2px solid #06D6A0; 
+            background-color: #F0EFEB; /* Lighter warm neutral */
+            border: 1px solid #D4A373;
             padding: 0.75rem;
-            border-radius: 0.375rem;
+            border-radius: 0.375rem; /* rounded-md */
             text-align: center;
-            background-color: #F0FDFA; 
-            width: 100%;
-            max-width: 20rem; 
         }
         .flowchart-arrow {
-            font-size: 1.5rem; 
-            color: #073B4C;
-            margin: 0.5rem 0;
-        }
-        .icon-placeholder {
-            font-size: 1.5rem;
-            margin-right: 0.5rem;
-        }
-        .gemini-button {
-            background-color: #FFD166; /* Sunny Yellow */
-            color: #073B4C; /* Dark Slate Blue */
-            padding: 0.5rem 1rem;
-            border-radius: 0.375rem;
-            font-weight: 500;
-            margin-top: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            border: 1px solid #E7B00B;
-        }
-        .gemini-button:hover {
-            background-color: #FBC53E;
-        }
-        .gemini-response-area {
-            margin-top: 1rem;
-            padding: 0.75rem;
-            background-color: #F0FDFA; /* Light teal for contrast */
-            border-radius: 0.375rem;
-            font-size: 0.875rem;
-            color: #073B4C;
-            border: 1px solid #06D6A0; /* Tealish Green */
-            white-space: pre-wrap; /* To respect newlines from Gemini */
+            font-size: 1.5rem; /* text-2xl */
+            color: #A98467; /* Muted Brown */
+            margin: 0.5rem;
         }
     </style>
 </head>
-<body class="bg-slate-100">
+<body class="antialiased">
 
-    <header class="bg-[#073B4C] text-white py-8 shadow-lg">
-        <div class="container mx-auto px-4 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-2">Papua New Guinea's Infrastructure</h1>
-            <p class="text-xl md:text-2xl text-[#FFD166]">Challenges, Progress, and the Path to a Resilient Future</p>
+    <header class="bg-[#A98467] text-white py-6 shadow-md">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold">Papua New Guinea's Infrastructure</h1>
+            <p class="text-lg md:text-xl opacity-90">Challenges, Developments, and the Path Forward (Post-2015)</p>
         </div>
     </header>
 
-    <nav class="bg-white shadow-md sticky top-0 z-50 hidden md:block">
-        <div class="container mx-auto px-4 py-3 flex justify-center space-x-2 overflow-x-auto">
-            <a href="#national-strategies" class="nav-link">National Strategies</a>
-            <a href="#telecom" class="nav-link">Telecom</a>
-            <a href="#transport" class="nav-link">Transport</a>
-            <a href="#energy" class="nav-link">Energy</a>
-            <a href="#wash" class="nav-link">WASH</a>
-            <a href="#cross-cutting" class="nav-link">Enablers</a>
-            <a href="#conclusion" class="nav-link">Conclusion</a>
+    <nav id="mainNav" class="bg-[#F0EFEB] shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-center items-center py-3 space-x-1 md:space-x-3 overflow-x-auto">
+                <a href="#introduction" class="nav-link">Intro</a>
+                <a href="#national-strategies" class="nav-link">Strategies</a>
+                <a href="#sector-deep-dive" class="nav-link">Sectors</a>
+                <a href="#cross-cutting-themes" class="nav-link">Themes</a>
+                <a href="#path-forward" class="nav-link">Outlook</a>
+            </div>
         </div>
     </nav>
 
-    <main class="container mx-auto p-4 md:p-8">
+    <main class="container mx-auto p-6 md:p-8">
 
-        <section class="mb-12 text-center">
-            <p class="text-lg md:text-xl leading-relaxed max-w-3xl mx-auto text-gray-700">
-                Since 2015-2016, Papua New Guinea has faced significant infrastructure deficits across crucial sectors. This infographic provides an updated assessment of the evolving landscape, examining developments, persistent challenges, and strategic responses in transport, energy, ICT, and WASH, highlighting the nation's journey towards a more prosperous and resilient future. Explore AI-powered insights by clicking the ✨ buttons!
-            </p>
+        <section id="introduction" class="mb-12 scroll-mt-20">
+            <h2 class="section-title">Understanding the Landscape</h2>
+            <div class="card">
+                <p class="text-lg leading-relaxed text-gray-700">
+                    Since 2015-2016, Papua New Guinea has faced a significant infrastructure deficit across vital economic and social sectors. This interactive summary explores the developments, persistent challenges, and strategic responses in PNG's journey to build a more resilient and prosperous future. The nation grapples with impacts from commodity price volatility, a rapidly growing population, and vulnerability to natural disasters, while simultaneously pursuing ambitious reforms and digital transformation.
+                </p>
+            </div>
         </section>
 
-        <section id="national-strategies" class="mb-12">
-            <h2 class="section-title">Overarching National Strategies</h2>
-            <p class="mb-6 text-gray-700">PNG's infrastructure development is guided by ambitious national plans aiming for transformative economic and social growth. These strategies outline key priorities and targets to address long-standing deficits.</p>
+        <section id="national-strategies" class="mb-12 scroll-mt-20">
+            <h2 class="section-title">National Vision & Key Strategies</h2>
+            <p class="text-gray-600 mb-6">PNG's infrastructure development is guided by long-term visions and medium-term plans, focusing on connectivity, economic growth, and modernisation.</p>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="stat-card">
-                    <h3 class="stat-title">MTDP IV Economic Goal</h3>
-                    <p class="stat-value">K200 Billion</p>
-                    <p class="stat-context">Target GDP by 2030 under Medium Term Development Plan IV.</p>
+                <div class="card text-center">
+                    <h3 class="text-xl font-semibold text-[#A98467] mb-2">MTDP IV Economic Goal</h3>
+                    <p class="stat-value">K200 Bn</p>
+                    <p class="stat-label">Target GDP by 2030</p>
                 </div>
-                <div class="stat-card">
-                    <h3 class="stat-title">Connect PNG: New Roads</h3>
-                    <p class="stat-value">2,500 km</p>
-                    <p class="stat-context">Target for new road construction by 2027 (Phase 1).</p>
+                <div class="card text-center">
+                    <h3 class="text-xl font-semibold text-[#A98467] mb-2">MTDP IV Job Creation</h3>
+                    <p class="stat-value">1 Million</p>
+                    <p class="stat-label">Additional jobs target</p>
                 </div>
-                <div class="stat-card">
-                    <h3 class="stat-title">Digital ID: GDP Impact</h3>
+                <div class="card text-center">
+                    <h3 class="text-xl font-semibold text-[#A98467] mb-2">SevisPass Digital ID Impact</h3>
                     <p class="stat-value">3-5%</p>
-                    <p class="stat-context">Projected GDP increase in 3-5 years from SevisPass Digital ID.</p>
+                    <p class="stat-label">Projected GDP Increase</p>
                 </div>
+            </div>
+            <div class="card mt-6">
+                <h3 class="text-xl font-semibold text-[#A98467] mb-3">"Connect PNG" Programme (2020-2040)</h3>
+                <p class="text-gray-700 mb-4">A multi-phased initiative to link all 22 provinces to the national highway network. Key objectives include:</p>
+                <ul class="list-disc list-inside text-gray-700 space-y-1">
+                    <li>Minimum 5.6% of National Budget annually (Connect PNG Act 2021).</li>
+                    <li>Phase 1 (2021-2027): Construct 2,500 km new roads; Improve 4,220 km of 16 priority highways.</li>
+                    <li>Reported Impacts: 20,000+ jobs, 20% transport cost reduction.</li>
+                    <li>Major Challenge: K45 billion road maintenance backlog. A special audit commenced in May 2025.</li>
+                </ul>
+            </div>
+            <div class="card mt-6">
+                <h3 class="text-xl font-semibold text-[#A98467] mb-3">Digital Transformation Agenda</h3>
+                <p class="text-gray-700">Focuses on modernising government services and enhancing digital inclusion through initiatives like the Digital Government Plan 2023-2027 and the SevisPass Digital ID project. Aims for eKYC, Single Sign-On, and biometric voting by 2027.</p>
             </div>
         </section>
 
-        <section id="telecom" class="mb-12">
-            <h2 class="section-title">Telecommunications & ICT</h2>
-            <p class="mb-6 text-gray-700">The ICT sector is crucial for PNG's development, with efforts focused on increasing connectivity, affordability, and leveraging digital transformation. However, significant gaps remain, particularly in rural access and cost.</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="stat-card">
-                    <h3 class="stat-title">Internet Penetration</h3>
-                    <div class="chart-container h-64 md:h-72"><canvas id="internetPenetrationChart"></canvas></div>
-                    <p class="stat-context text-center mt-2">~24.1% of population (Early 2025, DataReportal)</p>
-                </div>
-                <div class="stat-card">
-                    <h3 class="stat-title">Mobile Connections</h3>
-                    <div class="chart-container h-64 md:h-72"><canvas id="mobileConnectionsChart"></canvas></div>
-                    <p class="stat-context text-center mt-2">~47.2% of population (Early 2025, DataReportal/GSMA)</p>
-                </div>
-                <div class="stat-card">
-                    <h3 class="stat-title">Internet Affordability Challenge</h3>
-                    <div class="chart-container h-64 md:h-72"><canvas id="internetAffordabilityChart"></canvas></div>
-                    <p class="stat-context text-center mt-2">Low-consumption basket vs. GNI per capita (2024).</p>
-                </div>
-                <div class="stat-card md:col-span-2 lg:col-span-3">
-                    <h3 class="stat-title">Key ICT Infrastructure & Initiatives</h3>
-                    <ul class="list-disc list-inside text-gray-700 space-y-2">
-                        <li><span class="icon-placeholder">📡</span><strong>Submarine Cables (CSCS2, KSCN):</strong> Aiming to reduce costs and improve international/domestic bandwidth. KSCN repairs ongoing after 2022 earthquake.</li>
-                        <li><span class="icon-placeholder">🗼</span><strong>National Transmission Network (NTN):</strong> Over 12,000 km of fibre by PNG DataCo, plus 500 new mobile towers planned by 2026.</li>
-                        <li><span class="icon-placeholder">📱</span><strong>Market Competition:</strong> Three MNOs (Digicel, Vodafone, Telikom/Bmobile). Starlink licensed, but entry faced judicial review.</li>
-                        <li><span class="icon-placeholder">💡</span><strong>Digital Government Plan 2023-2027:</strong> Includes SevisPass Digital ID, G2B Single Window, eProcurement.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section id="transport" class="mb-12">
-            <h2 class="section-title">Transport Infrastructure</h2>
-            <p class="mb-6 text-gray-700">Transport is vital for PNG's connectivity and economy. Ambitious programs like "Connect PNG" aim to address vast road network deficiencies, while ports and aviation sectors are also seeing significant upgrades.</p>
-            
-            <h3 class="text-2xl font-semibold mb-4 mt-8 text-[#118AB2]">Roads & Bridges</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="stat-card">
-                    <h3 class="stat-title">Road Network Condition</h3>
-                    <div class="chart-container h-64 md:h-72"><canvas id="roadConditionChart"></canvas></div>
-                    <p class="stat-context text-center mt-2">Estimated 85% in poor condition.</p>
-                </div>
-                <div class="stat-card">
-                    <h3 class="stat-title">Maintenance Backlog</h3>
-                    <p class="stat-value">K45 Billion</p>
-                    <p class="stat-context">Estimated cost to address deferred road maintenance.</p>
-                </div>
-                <div class="stat-card">
-                    <h3 class="stat-title">Connect PNG: Strategic Highway Upgrades</h3>
-                    <div class="chart-container h-64 md:h-72"><canvas id="connectPngProgressChart"></canvas></div>
-                    <p class="stat-context text-center mt-2">Progress on 16,200km strategic highways (Phase 1 target: 4,220km).</p>
-                    <button class="gemini-button" onclick="fetchGeminiData('connectPNG', 'risksOpportunities', 'geminiResponseConnectPNG')">✨ Analyse Risks & Opportunities</button>
-                    <div id="geminiResponseConnectPNG" class="gemini-response-area" style="display: none;"></div>
-                </div>
+        <section id="sector-deep-dive" class="mb-12 scroll-mt-20">
+            <h2 class="section-title">Sector Deep Dives</h2>
+            <div class="mb-6 border-b border-gray-300">
+                <nav class="flex flex-wrap -mb-px" id="sectorTabs">
+                    <button class="tab-button active" data-tab="transport">Transport</button>
+                    <button class="tab-button" data-tab="energy">Energy</button>
+                    <button class="tab-button" data-tab="ict">ICT</button>
+                    <button class="tab-button" data-tab="wash">WASH</button>
+                </nav>
             </div>
 
-            <h3 class="text-2xl font-semibold mb-4 mt-8 text-[#118AB2]">Ports & Maritime</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="stat-card">
-                    <h3 class="stat-title">Kimbe Port Upgrade (AIFFP)</h3>
-                    <p class="stat-value">$95 Million AUD</p>
-                    <p class="stat-context">Australian funding for major upgrade, part of PNG Ports Infrastructure Investment Programme.</p>
-                </div>
-                <div class="stat-card">
-                    <h3 class="stat-title">Port Modernisation</h3>
-                     <p class="text-gray-700"><span class="icon-placeholder">🚢</span>Port Moresby (MIT) & Lae (SPICT) operated by ICTSI, showing improved performance and efficiency gains (e.g., 6x productivity at Lae with new cranes).</p>
-                     <p class="text-gray-700 mt-2"><span class="icon-placeholder">🇪🇺</span>EU developing major investment for Rabaul port renovation and greening.</p>
-                </div>
-            </div>
-
-            <h3 class="text-2xl font-semibold mb-4 mt-8 text-[#118AB2]">Aviation</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="stat-card">
-                    <h3 class="stat-title">Civil Aviation Development (CADIP)</h3>
-                    <p class="stat-value">K1.67 Billion</p>
-                    <p class="stat-context">Largest aviation investment, primarily ADB-funded, for airport infrastructure upgrades.</p>
-                </div>
-                <div class="stat-card">
-                    <h3 class="stat-title">Air Niugini Re-fleeting</h3>
-                    <p class="stat-value">NZ$2 Billion</p>
-                    <p class="stat-context">Investment for 2025-2028, acquiring 11 Airbus A220s & 2 Boeing 787s (under review).</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="energy" class="mb-12">
-            <h2 class="section-title">Energy Infrastructure</h2>
-            <p class="mb-6 text-gray-700">Access to reliable and affordable electricity is a critical challenge. PNG aims to increase access significantly and shift towards renewable energy, but the state utility PPL faces major operational and financial hurdles.</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="stat-card">
-                    <h3 class="stat-title">On-Grid Electricity Access</h3>
-                    <div class="chart-container h-64 md:h-72"><canvas id="electricityAccessChart"></canvas></div>
-                    <p class="stat-context text-center mt-2">Below 15% of population. Target: 70% by 2030.</p>
-                    <button class="gemini-button" onclick="fetchGeminiData('lowEnergyAccess', 'innovativeSolutions', 'geminiResponseEnergyAccess')">✨ Suggest Innovative Solutions</button>
-                    <div id="geminiResponseEnergyAccess" class="gemini-response-area" style="display: none;"></div>
-                </div>
-                <div class="stat-card">
-                    <h3 class="stat-title">Generation Mix (On-Grid, ~580-600MW Total)</h3 >
-                    <div class="chart-container h-64 md:h-72"><canvas id="generationMixChart"></canvas></div>
-                    <p class="stat-context text-center mt-2">Dominated by Hydropower and Diesel. Aim: 78% renewables by 2030.</p>
-                </div>
-                <div class="stat-card">
-                    <h3 class="stat-title">PNG Power Ltd (PPL) Loss</h3>
-                    <p class="stat-value">K271.79 Million</p>
-                    <p class="stat-context">Loss after tax in 2022, highlighting financial challenges.</p>
-                </div>
-                 <div class="stat-card md:col-span-2 lg:col-span-3">
-                    <h3 class="stat-title">Key Energy Initiatives & Projects</h3>
-                    <ul class="list-disc list-inside text-gray-700 space-y-2">
-                        <li><span class="icon-placeholder">💡</span><strong>World Bank NEAT Project (US$204m):</strong> To boost energy access, expand renewables, modernise infrastructure.</li>
-                        <li><span class="icon-placeholder">💧</span><strong>ADB Support:</strong> Hydropower rehabilitation, mini-grids, Sustainable Energy Sector Development Programme.</li>
-                        <li><span class="icon-placeholder">☀️</span><strong>Renewable Focus:</strong> Planned projects include Naoro Brown & Ramu 2 hydro, Edevu hydro, Markham Valley solar & biomass.</li>
-                        <li><span class="icon-placeholder">🔧</span><strong>PPL Reforms:</strong> KCH planning restructure, NEA now regulatory body. Significant investment needed for plant/network upgrades.</li>
-                    </ul>
-                    <button class="gemini-button" onclick="fetchGeminiData('majorRenewableProject', 'risksOpportunities', 'geminiResponseRenewableProject')">✨ Analyse Major Renewable Project R&O</button>
-                    <div id="geminiResponseRenewableProject" class="gemini-response-area" style="display: none;"></div>
-                </div>
-            </div>
-        </section>
-
-        <section id="wash" class="mb-12">
-            <h2 class="section-title">Water, Sanitation & Hygiene (WASH)</h2>
-            <p class="mb-6 text-gray-700">Access to safe water and sanitation remains critically low, posing significant public health challenges. Efforts are underway to improve services, but issues like low investment, aging infrastructure, and cost recovery persist.</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="stat-card">
-                    <h3 class="stat-title">Access to Improved Drinking Water</h3>
-                    <div class="chart-container h-64 md:h-72"><canvas id="waterAccessChart"></canvas></div>
-                    <p class="stat-context text-center mt-2">Less than 50% of households (DHS 2016-18).</p>
-                </div>
-                <div class="stat-card">
-                    <h3 class="stat-title">Access to Improved Sanitation</h3>
-                    <div class="chart-container h-64 md:h-72"><canvas id="sanitationAccessChart"></canvas></div>
-                    <p class="stat-context text-center mt-2">Only 29% of households (DHS 2016-18).</p>
-                    <button class="gemini-button" onclick="fetchGeminiData('lowSanitationAccess', 'innovativeSolutions', 'geminiResponseSanitation')">✨ Suggest Innovative Solutions</button>
-                    <div id="geminiResponseSanitation" class="gemini-response-area" style="display: none;"></div>
-                </div>
-                <div class="stat-card">
-                    <h3 class="stat-title">Water PNG: Non-Revenue Water</h3>
-                     <p class="stat-value">~52%</p>
-                    <p class="stat-context">High NRW due to leaks, illegal connections, aging infrastructure.</p>
-                </div>
-                <div class="stat-card md:col-span-2 lg:col-span-3">
-                    <h3 class="stat-title">Key WASH Initiatives & Challenges</h3>
-                    <ul class="list-disc list-inside text-gray-700 space-y-2">
-                        <li><span class="icon-placeholder">💧</span><strong>World Bank WSSDP (US$70m):</strong> Upgrading water supply in provincial/district towns (e.g., Bialla, Bulolo).</li>
-                        <li><span class="icon-placeholder">📜</span><strong>National WaSH Policy (2015) & Roadmap for WASH in Healthcare (2023-2030):</strong> Guiding frameworks.</li>
-                        <li><span class="icon-placeholder">💸</span><strong>Challenges:</strong> Low investment, aging infrastructure, culture of non-payment, land tenure disputes, governance issues, climate impacts.</li>
-                        <li><span class="icon-placeholder">🏙️</span><strong>Water PNG Plans (2025):</strong> Improve Port Moresby supply, new clarifier, potential Edevu Treatment Plant (PPP).</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section id="cross-cutting" class="mb-12">
-            <h2 class="section-title">Cross-Cutting Enablers & Themes</h2>
-            <p class="mb-6 text-gray-700">Several overarching factors influence PNG's ability to develop and maintain its infrastructure, including funding mechanisms, climate resilience, and the performance of state-owned enterprises.</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="stat-card">
-                    <h3 class="stat-title">Infrastructure Funding (2025 Budget)</h3>
-                    <p class="stat-value">K7.6 Billion</p>
-                    <p class="stat-context">Announced for infrastructure development, a 273% increase from 2018.</p>
-                     <p class="text-sm text-gray-700 mt-4">Significant international partnerships (ADB, World Bank, Australia/AIFFP, EU, China) are crucial for financing major projects.</p>
-                </div>
-
-                <div class="stat-card">
-                    <h3 class="stat-title">Climate Change & Resilience</h3>
-                    <p class="text-gray-700"><span class="icon-placeholder">🌍</span>PNG is acutely vulnerable. National Adaptation Plan (NAP) prioritises transport & infrastructure.</p>
-                    <p class="text-gray-700 mt-2"><span class="icon-placeholder">🛣️</span>DoWH Corporate Plan & Connect PNG include climate-resilient road standards.</p>
-                    <p class="text-gray-700 mt-2"><span class="icon-placeholder">💧</span>Focus on renewable energy and resilient port/WASH projects.</p>
-                    <p class="stat-context mt-2">Challenge: Integrating resilience comprehensively and addressing data/capacity gaps.</p>
-                </div>
-            </div>
-            <div class="stat-card mt-6">
-                <h3 class="stat-title text-center">SOE Reform: Kumul Consolidated Holdings (KCH) Oversight</h3>
-                <div class="flex flex-col items-center space-y-2 md:space-y-0 md:flex-row md:justify-around md:items-start mt-4">
-                    <div class="flex flex-col items-center text-center">
-                        <div class="flowchart-step mb-2">SOE Ownership Policy (2020) & KCH Act Amendment (2021)</div>
-                        <div class="flowchart-arrow hidden md:block transform rotate-90 md:rotate-0">&rarr;</div>
-                        <div class="flowchart-arrow md:hidden">&darr;</div>
+            <div id="transportContent" class="tab-content active">
+                <h3 class="text-2xl font-semibold text-gray-700 mb-4">Transport Infrastructure</h3>
+                <p class="text-gray-600 mb-6">Critical for connectivity in PNG's challenging geography, covering roads, ports, and aviation.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="card">
+                        <h4 class="text-lg font-semibold text-[#A98467] mb-3">Roads & Bridges</h4>
+                        <p class="stat-label">Network Condition (Est. 85% Poor)</p>
+                        <div class="chart-container mt-2"><canvas id="roadConditionChart"></canvas></div>
+                        <p class="mt-3 text-gray-700">K45 Billion estimated maintenance backlog.</p>
+                        <p class="mt-1 text-gray-700 text-sm">Connect PNG is the flagship programme.</p>
                     </div>
-                    <div class="flex flex-col items-center text-center">
-                        <div class="bg-[#FFD166] text-[#073B4C] p-4 rounded-lg shadow flowchart-step mb-2">
-                            Kumul Consolidated Holdings (KCH)
-                            <p class="text-xs">(Primary Oversight for SOEs)</p>
-                        </div>
-                        <div class="flowchart-arrow hidden md:block transform rotate-90 md:rotate-0">&rarr;</div>
-                        <div class="flowchart-arrow md:hidden">&darr;</div>
+                    <div class="card">
+                        <h4 class="text-lg font-semibold text-[#A98467] mb-3">Ports & Maritime</h4>
+                        <p class="text-gray-700">Key international ports (Port Moresby, Lae) operated by ICTSI show improved performance. AIFFP funding $95m AUD Kimbe Port upgrade. EU planning Rabaul port investment.</p>
                     </div>
-                    <div class="flowchart-step">
-                        SOEs (Air Niugini, Telikom, PPL, PNG Ports, Water PNG etc.)
-                        <p class="text-xs">Develop 3-yr Corporate Plans, Restructuring Strategies</p>
+                    <div class="card md:col-span-2">
+                        <h4 class="text-lg font-semibold text-[#A98467] mb-3">Aviation</h4>
+                        <p class="text-gray-700">CADIP (K1.67bn) for airport upgrades. Air Niugini's NZ$2bn re-fleeting programme (2025-2028) with new Airbus A220s and Boeing 787s (under review). New China Southern Airlines route active.</p>
                     </div>
                 </div>
-                <p class="stat-context text-center mt-4">Aim: Transform SOEs into profitable, efficient service providers with good governance.</p>
+            </div>
+
+            <div id="energyContent" class="tab-content">
+                <h3 class="text-2xl font-semibold text-gray-700 mb-4">Energy Infrastructure</h3>
+                <p class="text-gray-600 mb-6">Focuses on improving access to reliable and affordable electricity, with a shift towards renewable sources.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="card">
+                        <h4 class="text-lg font-semibold text-[#A98467] mb-3">Electricity Access</h4>
+                        <p class="stat-label">On-Grid Access (<15% of Population)</p>
+                        <div class="chart-container mt-2"><canvas id="electricityAccessChart"></canvas></div>
+                        <p class="mt-3 text-gray-700">Target: 70% access by 2030.</p>
+                    </div>
+                    <div class="card">
+                        <h4 class="text-lg font-semibold text-[#A98467] mb-3">Generation Mix (On-Grid)</p>
+                        <div class="chart-container mt-2"><canvas id="generationMixChart"></canvas></div>
+                        <p class="mt-3 text-gray-700">Aim: 78% renewables by 2030. Dominated by Hydro (39.7%) & Diesel (37.4%).</p>
+                    </div>
+                    <div class="card md:col-span-2">
+                         <h4 class="text-lg font-semibold text-[#A98467] mb-3">PNG Power Ltd (PPL) & Reforms</h4>
+                         <p class="text-gray-700">PPL faces operational and financial challenges. Reforms underway via KCH and NEA. World Bank NEAT project supports PPL mini-grid modernisation (PPP pilot).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="ictContent" class="tab-content">
+                <h3 class="text-2xl font-semibold text-gray-700 mb-4">Telecommunications & ICT</h3>
+                <p class="text-gray-600 mb-6">Aims to increase connectivity, affordability, and leverage digital transformation.</p>
+                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="card">
+                        <h4 class="text-lg font-semibold text-[#A98467] mb-3">Internet Penetration</h4>
+                        <div class="chart-container mt-2"><canvas id="internetPenetrationChart"></canvas></div>
+                        <p class="mt-1 text-center text-gray-700 text-sm">~24.1% (Early 2025, DataReportal)</p>
+                    </div>
+                    <div class="card">
+                        <h4 class="text-lg font-semibold text-[#A98467] mb-3">Mobile Connections</h4>
+                        <div class="chart-container mt-2"><canvas id="mobileConnectionsChart"></canvas></div>
+                         <p class="mt-1 text-center text-gray-700 text-sm">~47.2% of population (Early 2025, GSMA)</p>
+                    </div>
+                    <div class="card">
+                        <h4 class="text-lg font-semibold text-[#A98467] mb-3">Internet Affordability</h4>
+                        <p class="stat-value text-xl">12.04%</p>
+                        <p class="stat-label">of GNI per capita for low-consumption basket (2024). Target is <2%.</p>
+                    </div>
+                </div>
+                <div class="card mt-6">
+                    <h4 class="text-lg font-semibold text-[#A98467] mb-3">Key Developments</h4>
+                    <p class="text-gray-700">Submarine cables (CSCS2, KSCN) aim to reduce costs. PNG DataCo building 500 mobile towers. Three MNOs: Digicel, Vodafone, Telikom. Starlink licensed (entry faced review).</p>
+                </div>
+            </div>
+
+            <div id="washContent" class="tab-content">
+                <h3 class="text-2xl font-semibold text-gray-700 mb-4">Water, Sanitation & Hygiene (WASH)</h3>
+                <p class="text-gray-600 mb-6">Critically low access to safe water and sanitation poses significant public health challenges.</p>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="card">
+                        <h4 class="text-lg font-semibold text-[#A98467] mb-3">Improved Drinking Water Access</h4>
+                        <div class="chart-container mt-2"><canvas id="waterAccessChart"></canvas></div>
+                        <p class="mt-1 text-center text-gray-700 text-sm"><50% of households (DHS 2016-18)</p>
+                    </div>
+                    <div class="card">
+                        <h4 class="text-lg font-semibold text-[#A98467] mb-3">Improved Sanitation Access</h4>
+                        <div class="chart-container mt-2"><canvas id="sanitationAccessChart"></canvas></div>
+                        <p class="mt-1 text-center text-gray-700 text-sm">~29% of households (DHS 2016-18)</p>
+                    </div>
+                </div>
+                <div class="card mt-6">
+                    <h4 class="text-lg font-semibold text-[#A98467] mb-3">Key Challenges & Initiatives</h4>
+                    <p class="text-gray-700">Challenges: Low investment, high Non-Revenue Water (~52% for Water PNG), aging infrastructure, land tenure. Initiatives: World Bank WSSDP, Water PNG plans for Port Moresby, Korea-UNICEF partnership.</p>
+                </div>
             </div>
         </section>
 
-        <section id="conclusion" class="mb-12">
-            <h2 class="section-title">Conclusion: Opportunities, Risks & The Path Forward</h2>
-            <p class="mb-6 text-gray-700">PNG is at a critical juncture. Ambitious strategies and international support offer significant opportunities, but substantial risks related to funding, governance, capacity, and climate change must be managed to ensure sustainable infrastructure development and improve citizens' lives.</p>
+        <section id="cross-cutting-themes" class="mb-12 scroll-mt-20">
+            <h2 class="section-title">Cross-Cutting Themes & Enablers</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="stat-card bg-[#E6FFFA] border-l-4 border-[#06D6A0]">
-                    <h3 class="stat-title text-[#047857]">Key Opportunities</h3>
-                    <ul class="list-disc list-inside text-gray-700 space-y-1 mt-2">
+                <div class="card">
+                    <h3 class="text-xl font-semibold text-[#A98467] mb-3">Funding & Investment</h3>
+                    <p class="text-gray-700 mb-2">K7.6 billion infrastructure budget for 2025 (273% increase from 2018). Strong reliance on international partners (ADB, World Bank, Australia, EU, China).</p>
+                    <p class="text-gray-700 font-medium">Public-Private Partnerships (PPPs):</p>
+                    <p class="text-gray-700 text-sm">Framework strengthened (PPP Act, Regulations). PPP Centre being established. Focus on value for money, risk allocation, and community benefit. Challenges: domestic market depth, institutional capacity.</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-xl font-semibold text-[#A98467] mb-3">Climate Resilience</h3>
+                    <p class="text-gray-700">PNG is highly vulnerable. National Adaptation Plan (NAP) prioritises transport & infrastructure. DoWH Corporate Plan includes climate-resilient roads. Green Finance Centre aims to mobilise climate finance.</p>
+                </div>
+            </div>
+            <div class="card mt-6">
+                <h3 class="text-xl font-semibold text-[#A98467] mb-3 text-center">SOE Reform: Kumul Consolidated Holdings (KCH) Oversight</h3>
+                <div class="flex flex-col items-center space-y-2 md:space-y-0 md:flex-row md:justify-around md:items-start mt-4 px-4">
+                    <div class="flowchart-step">SOE Ownership Policy (2020) & KCH Act Amendment (2021)</div>
+                    <div class="flowchart-arrow self-center hidden md:block">&rarr;</div>
+                    <div class="flowchart-arrow self-center md:hidden">&darr;</div>
+                    <div class="flowchart-step bg-[#DDE5B6] border-[#ADC178]">Kumul Consolidated Holdings (KCH) <p class="text-xs">(Primary Oversight)</p></div>
+                    <div class="flowchart-arrow self-center hidden md:block">&rarr;</div>
+                    <div class="flowchart-arrow self-center md:hidden">&darr;</div>
+                    <div class="flowchart-step">State-Owned Enterprises (PPL, Air Niugini, etc.) <p class="text-xs">(Develop Corporate Plans)</p></div>
+                </div>
+                <p class="text-sm text-gray-600 text-center mt-3">Aim: Transform SOEs into profitable, efficient service providers.</p>
+            </div>
+        </section>
+
+        <section id="path-forward" class="mb-12 scroll-mt-20">
+            <h2 class="section-title">The Path Forward: Opportunities & Risks</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="card border-l-4 border-[#ADC178]">
+                    <h3 class="text-xl font-semibold text-[#ADC178] mb-3">Opportunities</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-1">
                         <li>Strategic National Programmes (Connect PNG, Digital Transformation).</li>
-                        <li>SOE Reforms & strengthened PPP framework to attract private capital.</li>
-                        <li>Abundant Renewable Energy Potential (hydro, solar, geothermal).</li>
-                        <li>Strong International Partnerships providing finance & expertise.</li>
+                        <li>Resource sector linkages for economic diversification.</li>
+                        <li>SOE Reforms and strengthened PPP framework.</li>
+                        <li>Abundant Renewable Energy Potential.</li>
+                        <li>Strong International Partnerships.</li>
                     </ul>
                 </div>
-                <div class="stat-card bg-[#FFF5F5] border-l-4 border-[#FF6B6B]">
-                    <h3 class="stat-title text-[#C53030]">Potential Risks</h3>
-                    <ul class="list-disc list-inside text-gray-700 space-y-1 mt-2">
-                        <li>Funding Sustainability & immense maintenance backlogs.</li>
-                        <li>Governance, transparency, and corruption concerns.</li>
+                <div class="card border-l-4 border-[#E76F51]">
+                    <h3 class="text-xl font-semibold text-[#E76F51] mb-3">Potential Risks</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-1">
+                        <li>Funding sustainability & maintenance backlogs.</li>
+                        <li>Governance, transparency, and corruption.</li>
                         <li>Institutional and human capacity constraints.</li>
-                        <li>Complex land tenure issues delaying projects.</li>
-                        <li>High vulnerability to climate change and natural disasters.</li>
+                        <li>Land tenure complexity.</li>
+                        <li>Climate change and natural disasters.</li>
                         <li>SOE underperformance and financial instability.</li>
-                        <li>Macroeconomic volatility and security issues.</li>
                     </ul>
                 </div>
             </div>
-            <p class="mt-8 text-lg text-center text-gray-800">
-                The path forward requires steadfast commitment to strategic frameworks, robust governance, transparent procurement, and a clear focus on long-term sustainability and equitable benefit distribution for all citizens.
-            </p>
+            <div class="card mt-6">
+                <h3 class="text-xl font-semibold text-[#A98467] mb-3">Key Recommendations Summary</h3>
+                <p class="text-gray-700">Success requires robust governance, transparent procurement, sustainable funding (including for maintenance), capacity building, effective land tenure management, comprehensive climate resilience, and a focus on equitable benefit distribution for all citizens.</p>
+            </div>
         </section>
-        
     </main>
 
-    <footer class="bg-[#073B4C] text-white py-6 mt-12">
-        <div class="container mx-auto px-4 text-center">
-            <p class="text-sm">&copy; 2025 PNG Infrastructure Infographic. Data based on "INFRASTRUCTURE CHALLENGES FOR PAPUA NEW GUINEA’S FUTURE: AN UPDATED ASSESSMENT (Post-2015 Developments)".</p>
-            <p class="text-xs mt-1">This is a visual representation and interpretation of complex data for illustrative purposes. AI-generated content requires verification.</p>
+    <footer class="bg-[#4A4A4A] text-[#FDFBF7] py-8 mt-12">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-sm">Interactive application based on the report: "INFRASTRUCTURE CHALLENGES FOR PAPUA NEW GUINEA’S FUTURE: AN UPDATED ASSESSMENT (Post-2015 Developments)".</p>
+            <p class="text-xs mt-1 opacity-80">This is a visual summary and interpretation for informational purposes.</p>
         </div>
     </footer>
 
-    <div id="geminiModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center z-[100]" style="display: none;">
-        <div class="bg-white p-6 rounded-lg shadow-xl w-11/12 md:max-w-md mx-auto">
-            <h3 id="geminiModalTitle" class="text-lg font-semibold mb-3 text-[#073B4C]">Loading...</h3>
-            <div id="geminiModalContent" class="text-sm text-gray-700 max-h-60 overflow-y-auto"></div>
-            <button id="geminiModalClose" class="mt-4 bg-[#118AB2] text-white px-4 py-2 rounded hover:bg-[#0F789D] w-full">Close</button>
-        </div>
-    </div>
-
     <script>
-        function wrapLabel(label, maxWidth = 16) {
-            if (typeof label !== 'string' || label.length <= maxWidth) {
-                return label;
-            }
-            const words = label.split(' ');
+        // Helper function to wrap labels for Chart.js
+        function wrapChartLabel(str, maxWidth) {
+            const words = str.split(' ');
             let currentLine = '';
             const lines = [];
             for (const word of words) {
@@ -445,354 +385,226 @@
             if (currentLine.trim().length > 0) {
                 lines.push(currentLine.trim());
             }
-            return lines.length > 0 ? lines : [label];
+            return lines.length > 0 ? lines : [str]; // Return array of strings or original string if not wrapped
         }
 
+        // Default Chart.js options including tooltip callback
         const defaultChartOptions = {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
                 legend: {
                     position: 'bottom',
-                    labels: {
-                        color: '#073B4C',
-                        font: { size: 10 }
+                    labels: { 
+                        color: '#4A4A4A', 
+                        font: { size: 11 },
+                        padding: 15
                     }
                 },
                 tooltip: {
                     callbacks: {
                         title: function(tooltipItems) {
                             const item = tooltipItems[0];
+                            if (!item) return '';
                             let label = item.chart.data.labels[item.dataIndex];
-                            if (Array.isArray(label)) {
-                              return label.join(' ');
-                            }
-                            return label;
+                            return Array.isArray(label) ? label.join(' ') : label;
                         }
                     }
                 }
             },
             scales: {
-                y: {
-                    ticks: { color: '#073B4C', font: { size: 10 } },
-                    grid: { color: '#E2E8F0' }
-                },
-                x: {
-                    ticks: { color: '#073B4C', font: { size: 10 } },
-                    grid: { display: false }
-                }
+                y: { ticks: { color: '#4A4A4A', font: { size: 10 } }, grid: { color: '#EEEAE6' } },
+                x: { ticks: { color: '#4A4A4A', font: { size: 10 } }, grid: { display: false } }
             }
         };
-
-        const energeticPlayfulPalette = {
-            coralRed: '#FF6B6B',
-            sunnyYellow: '#FFD166',
-            tealishGreen: '#06D6A0',
-            ceruleanBlue: '#118AB2',
-            darkSlateBlue: '#073B4C',
-            lightGray: '#F8F9FA'
+        
+        const chartColors = {
+            brown: '#A98467',
+            sageGreen: '#ADC178',
+            lightOlive: '#DDE5B6',
+            terracotta: '#E76F51',
+            darkGrey: '#4A4A4A',
+            offWhite: '#FDFBF7'
         };
 
-        // Chart 1: Internet Penetration
-        const internetCtx = document.getElementById('internetPenetrationChart').getContext('2d');
-        new Chart(internetCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Internet Users', 'Offline Population'],
-                datasets: [{
-                    label: 'Internet Penetration',
-                    data: [24.1, 100 - 24.1],
-                    backgroundColor: [energeticPlayfulPalette.ceruleanBlue, energeticPlayfulPalette.lightGray],
-                    borderColor: [energeticPlayfulPalette.ceruleanBlue, energeticPlayfulPalette.lightGray],
-                    borderWidth: 1
-                }]
-            },
-            options: {...defaultChartOptions, cutout: '70%'}
-        });
-
-        // Chart 2: Mobile Connections
-        const mobileCtx = document.getElementById('mobileConnectionsChart').getContext('2d');
-        new Chart(mobileCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Mobile Connections', 'No Connection'],
-                datasets: [{
-                    label: 'Mobile Connections',
-                    data: [47.2, 100 - 47.2],
-                    backgroundColor: [energeticPlayfulPalette.tealishGreen, energeticPlayfulPalette.lightGray],
-                    borderColor: [energeticPlayfulPalette.tealishGreen, energeticPlayfulPalette.lightGray],
-                    borderWidth: 1
-                }]
-            },
-            options: {...defaultChartOptions, cutout: '70%'}
-        });
-        
-        // Chart 3: Internet Affordability
-        const affordabilityCtx = document.getElementById('internetAffordabilityChart').getContext('2d');
-        new Chart(affordabilityCtx, {
-            type: 'bar',
-            data: {
-                labels: [wrapLabel('PNG Cost (% GNI per capita)'), wrapLabel('Target Cost (% GNI per capita)')],
-                datasets: [{
-                    label: 'Internet Basket Cost',
-                    data: [12.04, 2], 
-                    backgroundColor: [energeticPlayfulPalette.coralRed, energeticPlayfulPalette.sunnyYellow],
-                    borderColor: [energeticPlayfulPalette.coralRed, energeticPlayfulPalette.sunnyYellow],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                ...defaultChartOptions,
-                indexAxis: 'y',
-                 scales: {
-                    x: { 
-                        ticks: { color: '#073B4C', font: {size: 10}, callback: function(value) { return value + '%' } },
-                        grid: { color: '#E2E8F0' }
-                    },
-                    y: { ticks: { color: '#073B4C', font: {size: 10} }, grid: {display: false} }
+        // Chart Initializations
+        // Road Condition Chart
+        const roadConditionCtx = document.getElementById('roadConditionChart')?.getContext('2d');
+        if (roadConditionCtx) {
+            new Chart(roadConditionCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Poor Condition', 'Fair/Good'],
+                    datasets: [{
+                        data: [85, 15], // 85% poor
+                        backgroundColor: [chartColors.terracotta, chartColors.sageGreen],
+                        borderColor: chartColors.offWhite,
+                        borderWidth: 2
+                    }]
                 },
-                plugins: {
-                    ...defaultChartOptions.plugins,
-                    tooltip: {
-                        callbacks: {
-                             title: function(tooltipItems) { 
-                                const item = tooltipItems[0];
-                                let label = item.chart.data.labels[item.dataIndex];
-                                if (Array.isArray(label)) { return label.join(' '); }
-                                return label;
-                            },
-                            label: function(context) {
-                                return context.dataset.label + ': ' + context.raw + '%';
-                            }
-                        }
-                    }
-                }
-            }
-        });
-
-        // Chart 4: Road Network Condition
-        const roadConditionCtx = document.getElementById('roadConditionChart').getContext('2d');
-        new Chart(roadConditionCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Poor Condition', 'Fair/Good Condition'],
-                datasets: [{
-                    label: 'Road Network Condition',
-                    data: [85, 15],
-                    backgroundColor: [energeticPlayfulPalette.coralRed, energeticPlayfulPalette.tealishGreen],
-                    borderColor: [energeticPlayfulPalette.coralRed, energeticPlayfulPalette.tealishGreen],
-                    borderWidth: 1
-                }]
-            },
-            options: {...defaultChartOptions, cutout: '70%'}
-        });
-
-        // Chart 5: Connect PNG Progress (Simplified Bar)
-        const connectPngProgressCtx = document.getElementById('connectPngProgressChart').getContext('2d');
-        new Chart(connectPngProgressCtx, {
-            type: 'bar',
-            data: {
-                labels: [wrapLabel('Upgraded Strategic Highways (km)')],
-                datasets: [
-                    {
-                        label: 'Achieved',
-                        data: [3500], 
-                        backgroundColor: energeticPlayfulPalette.ceruleanBlue,
-                    },
-                    {
-                        label: 'Phase 1 Target Remaining', 
-                        data: [4220 - 3500], 
-                        backgroundColor: energeticPlayfulPalette.lightGray,
-                    }
-                ]
-            },
-            options: {
-                ...defaultChartOptions,
-                indexAxis: 'y',
-                scales: {
-                    x: { stacked: true, ticks: { color: '#073B4C', font: {size: 10} }, grid: { color: '#E2E8F0' } },
-                    y: { stacked: true, ticks: { color: '#073B4C', font: {size: 10} }, grid: {display: false} }
-                },
-                plugins: {
-                    ...defaultChartOptions.plugins,
-                    tooltip: {
-                        callbacks: {
-                            title: function(tooltipItems) { 
-                                const item = tooltipItems[0];
-                                let label = item.chart.data.labels[item.dataIndex];
-                                if (Array.isArray(label)) { return label.join(' '); }
-                                return label;
-                            },
-                            label: function(context) {
-                                return context.dataset.label + ': ' + context.raw.toLocaleString() + ' km';
-                            }
-                        }
-                    }
-                }
-            }
-        });
-        
-        // Chart 6: Electricity Access
-        const electricityAccessCtx = document.getElementById('electricityAccessChart').getContext('2d');
-        new Chart(electricityAccessCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['On-Grid Access', 'No On-Grid Access'],
-                datasets: [{
-                    label: 'Electricity Access',
-                    data: [15, 85], 
-                    backgroundColor: [energeticPlayfulPalette.sunnyYellow, energeticPlayfulPalette.lightGray],
-                    borderColor: [energeticPlayfulPalette.sunnyYellow, energeticPlayfulPalette.lightGray],
-                    borderWidth: 1
-                }]
-            },
-            options: {...defaultChartOptions, cutout: '70%'}
-        });
-
-        // Chart 7: Generation Mix
-        const generationMixCtx = document.getElementById('generationMixChart').getContext('2d');
-        new Chart(generationMixCtx, {
-            type: 'pie',
-            data: {
-                labels: ['Hydropower (39.7%)', 'Diesel (37.4%)', 'Fossil Gas (14.1%)', 'Geothermal (9.1%)', 'Solar (~1%)'],
-                datasets: [{
-                    label: 'On-Grid Generation Mix',
-                    data: [39.7, 37.4, 14.1, 9.1, 1], 
-                    backgroundColor: [
-                        energeticPlayfulPalette.ceruleanBlue,
-                        energeticPlayfulPalette.coralRed,
-                        energeticPlayfulPalette.darkSlateBlue,
-                        energeticPlayfulPalette.sunnyYellow,
-                        energeticPlayfulPalette.tealishGreen
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {...defaultChartOptions, 
-                plugins: {
-                    ...defaultChartOptions.plugins,
-                    legend: { position: 'right', labels: {color: '#073B4C', font: {size:9}, boxWidth:15}}
-                }
-            }
-        });
-
-        // Chart 8: Access to Improved Drinking Water
-        const waterAccessCtx = document.getElementById('waterAccessChart').getContext('2d');
-        new Chart(waterAccessCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Improved Water', 'Unimproved/Surface Water'],
-                datasets: [{
-                    label: 'Access to Improved Drinking Water',
-                    data: [45, 55], 
-                    backgroundColor: [energeticPlayfulPalette.ceruleanBlue, energeticPlayfulPalette.lightGray],
-                    borderColor: [energeticPlayfulPalette.ceruleanBlue, energeticPlayfulPalette.lightGray],
-                    borderWidth: 1
-                }]
-            },
-            options: {...defaultChartOptions, cutout: '70%'}
-        });
-
-        // Chart 9: Access to Improved Sanitation
-        const sanitationAccessCtx = document.getElementById('sanitationAccessChart').getContext('2d');
-        new Chart(sanitationAccessCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Improved Sanitation', 'Unimproved/Open Defecation'],
-                datasets: [{
-                    label: 'Access to Improved Sanitation',
-                    data: [29, 71], 
-                    backgroundColor: [energeticPlayfulPalette.tealishGreen, energeticPlayfulPalette.lightGray],
-                    borderColor: [energeticPlayfulPalette.tealishGreen, energeticPlayfulPalette.lightGray],
-                    borderWidth: 1
-                }]
-            },
-            options: {...defaultChartOptions, cutout: '70%'}
-        });
-
-        // Gemini API Integration
-        const geminiModal = document.getElementById('geminiModal');
-        const geminiModalTitle = document.getElementById('geminiModalTitle');
-        const geminiModalContent = document.getElementById('geminiModalContent');
-        const geminiModalClose = document.getElementById('geminiModalClose');
-
-        geminiModalClose.addEventListener('click', () => {
-            geminiModal.style.display = 'none';
-        });
-
-        function showGeminiModal(title, content) {
-            geminiModalTitle.textContent = title;
-            geminiModalContent.innerHTML = content.replace(/\n/g, '<br>'); // Basic formatting for newlines
-            geminiModal.style.display = 'flex';
+                options: {...defaultChartOptions, cutout: '60%'}
+            });
         }
 
-        async function fetchGeminiData(context, type, responseElementId) {
-            const responseElement = document.getElementById(responseElementId);
-            responseElement.style.display = 'none'; // Hide previous response
-            showGeminiModal('✨ AI Assistant Loading...', 'Fetching insights from Gemini API. Please wait...');
+        // Electricity Access Chart
+        const electricityAccessCtx = document.getElementById('electricityAccessChart')?.getContext('2d');
+        if (electricityAccessCtx) {
+            new Chart(electricityAccessCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['On-Grid Access', 'No On-Grid Access'],
+                    datasets: [{
+                        data: [15, 85], // <15% on-grid access
+                        backgroundColor: [chartColors.sageGreen, chartColors.lightOlive],
+                        borderColor: chartColors.offWhite,
+                        borderWidth: 2
+                    }]
+                },
+                options: {...defaultChartOptions, cutout: '60%'}
+            });
+        }
 
-            let prompt = "";
-            if (type === 'risksOpportunities') {
-                if (context === 'connectPNG') {
-                    prompt = "You are an infrastructure development analyst. For a large-scale national road connectivity program like 'Connect PNG' in Papua New Guinea, which aims to connect various regions and stimulate economic activity, briefly list 3 potential key risks and 3 potential key opportunities. Focus on socio-economic and logistical aspects relevant to PNG's context. Present as bullet points under 'Risks:' and 'Opportunities:' headings.";
-                } else if (context === 'majorRenewableProject') {
-                    prompt = "You are an energy project analyst. For a major new renewable energy project (e.g., large hydropower or solar farm) in Papua New Guinea, briefly list 3 potential key risks and 3 potential key opportunities. Consider environmental, social, technical, and financial aspects relevant to PNG. Present as bullet points under 'Risks:' and 'Opportunities:' headings.";
-                }
-            } else if (type === 'innovativeSolutions') {
-                if (context === 'lowEnergyAccess') {
-                    prompt = "You are a sustainable development expert. For Papua New Guinea, where on-grid electricity access is below 15%, suggest 3 innovative and context-appropriate solutions or strategies to significantly improve rural and remote electricity access, beyond traditional grid expansion. Focus on sustainability and community involvement. Present as a numbered list with brief explanations.";
-                } else if (context === 'lowSanitationAccess') {
-                    prompt = "You are a public health and WASH (Water, Sanitation, Hygiene) specialist. For Papua New Guinea, where access to improved sanitation is very low (around 29%), suggest 3 innovative and culturally sensitive solutions or strategies to significantly improve sanitation coverage, particularly in rural and peri-urban areas. Focus on sustainability, community participation, and health impact. Present as a numbered list with brief explanations.";
-                }
-            }
+        // Generation Mix Chart
+        const generationMixCtx = document.getElementById('generationMixChart')?.getContext('2d');
+        if (generationMixCtx) {
+            new Chart(generationMixCtx, {
+                type: 'pie',
+                data: {
+                    labels: [wrapChartLabel('Hydropower (39.7%)', 16), wrapChartLabel('Diesel (37.4%)', 16), wrapChartLabel('Fossil Gas (14.1%)', 16), wrapChartLabel('Geothermal (9.1%)', 16), wrapChartLabel('Solar (~1%)',16)],
+                    datasets: [{
+                        data: [39.7, 37.4, 14.1, 9.1, 1.0],
+                        backgroundColor: [chartColors.brown, chartColors.terracotta, chartColors.darkGrey, chartColors.sageGreen, chartColors.lightOlive],
+                        borderColor: chartColors.offWhite,
+                        borderWidth: 2
+                    }]
+                },
+                options: {...defaultChartOptions, plugins: { ...defaultChartOptions.plugins, legend: { position: 'right', labels: {...defaultChartOptions.plugins.legend.labels, boxWidth: 12, padding:10, font: {size: 9}}}}}
+            });
+        }
+        
+        // Internet Penetration Chart
+        const internetPenetrationCtx = document.getElementById('internetPenetrationChart')?.getContext('2d');
+        if (internetPenetrationCtx) {
+            new Chart(internetPenetrationCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Internet Users', 'Offline Population'],
+                    datasets: [{
+                        data: [24.1, 75.9], // ~24.1% Early 2025
+                        backgroundColor: [chartColors.sageGreen, chartColors.lightOlive],
+                        borderColor: chartColors.offWhite,
+                        borderWidth: 2
+                    }]
+                },
+                options: {...defaultChartOptions, cutout: '60%'}
+            });
+        }
 
-            if (!prompt) {
-                showGeminiModal('Error', 'Invalid context for Gemini API call.');
-                return;
-            }
+        // Mobile Connections Chart
+        const mobileConnectionsCtx = document.getElementById('mobileConnectionsChart')?.getContext('2d');
+        if (mobileConnectionsCtx) {
+            new Chart(mobileConnectionsCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Mobile Connections', 'No Connection'],
+                    datasets: [{
+                        data: [47.2, 52.8], // ~47.2% Early 2025
+                        backgroundColor: [chartColors.brown, chartColors.lightOlive],
+                        borderColor: chartColors.offWhite,
+                        borderWidth: 2
+                    }]
+                },
+                options: {...defaultChartOptions, cutout: '60%'}
+            });
+        }
+
+        // Water Access Chart
+        const waterAccessCtx = document.getElementById('waterAccessChart')?.getContext('2d');
+        if (waterAccessCtx) {
+            new Chart(waterAccessCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Improved Water', 'Unimproved'],
+                    datasets: [{
+                        data: [45, 55], // Using <50%, e.g., 45% for visual
+                        backgroundColor: [chartColors.sageGreen, chartColors.lightOlive],
+                        borderColor: chartColors.offWhite,
+                        borderWidth: 2
+                    }]
+                },
+                options: {...defaultChartOptions, cutout: '60%'}
+            });
+        }
+
+        // Sanitation Access Chart
+        const sanitationAccessCtx = document.getElementById('sanitationAccessChart')?.getContext('2d');
+        if (sanitationAccessCtx) {
+            new Chart(sanitationAccessCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Improved Sanitation', 'Unimproved/Open'],
+                    datasets: [{
+                        data: [29, 71], // ~29%
+                        backgroundColor: [chartColors.terracotta, chartColors.lightOlive],
+                        borderColor: chartColors.offWhite,
+                        borderWidth: 2
+                    }]
+                },
+                options: {...defaultChartOptions, cutout: '60%'}
+            });
+        }
+
+        // Tab Functionality
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const sectorTabsContainer = document.getElementById('sectorTabs');
+
+        if (sectorTabsContainer) {
+            sectorTabsContainer.addEventListener('click', (e) => {
+                if (e.target.classList.contains('tab-button')) {
+                    const tabId = e.target.dataset.tab;
+
+                    tabButtons.forEach(button => button.classList.remove('active'));
+                    e.target.classList.add('active');
+
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                        if (content.id === `${tabId}Content`) {
+                            content.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }
+
+        // Smooth scroll for navigation links & active state
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        const navLinks = document.querySelectorAll('#mainNav .nav-link');
+        const sections = document.querySelectorAll('main section');
+
+        function changeNavActiveState() {
+            let index = sections.length;
+            while(--index && window.scrollY + 100 < sections[index].offsetTop) {} // 100px offset
             
-            const apiKey = ""; // API Key will be injected by the environment
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-            
-            const payload = {
-                contents: [{ role: "user", parts: [{ text: prompt }] }]
-            };
-
-            try {
-                const apiResponse = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                if (!apiResponse.ok) {
-                    const errorData = await apiResponse.json();
-                    console.error('Gemini API Error:', errorData);
-                    showGeminiModal('AI Assistant Error', `Could not fetch insights. Status: ${apiResponse.status}. Please try again later.`);
-                    return;
-                }
-
-                const result = await apiResponse.json();
-                
-                let text = "No content generated.";
-                if (result.candidates && result.candidates.length > 0 &&
-                    result.candidates[0].content && result.candidates[0].content.parts &&
-                    result.candidates[0].content.parts.length > 0) {
-                    text = result.candidates[0].content.parts[0].text;
-                } else {
-                     showGeminiModal('AI Assistant Response', 'Received an empty or unexpected response from the AI.');
-                     return;
-                }
-                
-                responseElement.innerHTML = text.replace(/\n/g, '<br>'); // Basic formatting
-                responseElement.style.display = 'block';
-                geminiModal.style.display = 'none'; // Hide loading modal
-
-            } catch (error) {
-                console.error('Fetch error:', error);
-                showGeminiModal('Network Error', 'Could not connect to the AI assistant. Please check your internet connection and try again.');
+            navLinks.forEach((link) => link.classList.remove('active'));
+            if (index >= 0 && navLinks[index]) { // Check if navLinks[index] exists
+                 navLinks[index].classList.add('active');
             }
         }
+        changeNavActiveState(); // Initial call
+        window.addEventListener('scroll', changeNavActiveState);
 
     </script>
 </body>
