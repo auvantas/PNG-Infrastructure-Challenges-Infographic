@@ -1,6 +1,6 @@
 import streamlit as st
 
-def get_streamlit_app_content(groq_api_key_js): # Renamed parameter
+def get_streamlit_app_content(groq_api_key_js):
     """
     Generates the HTML, CSS, and JavaScript content for the Streamlit app.
     The Groq API key is injected into the JavaScript part.
@@ -15,7 +15,7 @@ def get_streamlit_app_content(groq_api_key_js): # Renamed parameter
         }
         .chart-container {
             position: relative;
-            width: 100%;
+            width: 100%; /* This percent is fine as it's not in the string being formatted by Python % op */
             max-width: 500px; 
             margin-left: auto;
             margin-right: auto;
@@ -77,7 +77,7 @@ def get_streamlit_app_content(groq_api_key_js): # Renamed parameter
             border-radius: 0.375rem;
             text-align: center;
             background-color: #F0FDFA; 
-            width: 100%;
+            width: 100%; /* This percent is fine */
             max-width: 20rem; 
         }
         .flowchart-arrow {
@@ -89,7 +89,7 @@ def get_streamlit_app_content(groq_api_key_js): # Renamed parameter
             font-size: 1.5rem;
             margin-right: 0.5rem;
         }
-        .gemini-button { /* Will rename this class in HTML to ai-button or similar if desired */
+        .gemini-button { 
             background-color: #FFD166; 
             color: #073B4C; 
             padding: 0.5rem 1rem;
@@ -100,10 +100,10 @@ def get_streamlit_app_content(groq_api_key_js): # Renamed parameter
             transition: background-color 0.3s ease;
             border: 1px solid #E7B00B;
         }
-        .gemini-button:hover { /* Will rename this class in HTML to ai-button or similar if desired */
+        .gemini-button:hover {
             background-color: #FBC53E;
         }
-        .gemini-response-area { /* Will rename this class in HTML to ai-response-area or similar if desired */
+        .gemini-response-area { 
             margin-top: 1rem;
             padding: 0.75rem;
             background-color: #F0FDFA; 
@@ -113,12 +113,11 @@ def get_streamlit_app_content(groq_api_key_js): # Renamed parameter
             border: 1px solid #06D6A0; 
             white-space: pre-wrap; 
         }
-        #geminiModal { /* Will rename this ID in HTML to aiModal or similar if desired */
+        #geminiModal { 
             z-index: 1050; 
         }
     """
 
-    # Meticulously check and escape all '%' in body_content_html
     body_content_html = """
     <div style="background-color: #F8F9FA;">
         <header class="bg-[#073B4C] text-white py-8 shadow-lg">
@@ -127,7 +126,6 @@ def get_streamlit_app_content(groq_api_key_js): # Renamed parameter
                 <p class="text-xl md:text-2xl text-[#FFD166]">Challenges, Progress, and the Path to a Resilient Future</p>
             </div>
         </header>
-
         <nav class="bg-white shadow-md sticky top-0 z-50 hidden md:block">
             <div class="container mx-auto px-4 py-3 flex justify-center space-x-2 overflow-x-auto">
                 <a href="#national-strategies" class="nav-link">National Strategies</a>
@@ -139,14 +137,12 @@ def get_streamlit_app_content(groq_api_key_js): # Renamed parameter
                 <a href="#conclusion" class="nav-link">Conclusion</a>
             </div>
         </nav>
-
         <main class="container mx-auto p-4 md:p-8">
             <section class="mb-12 text-center">
                 <p class="text-lg md:text-xl leading-relaxed max-w-3xl mx-auto text-gray-700">
                     Since 2015-2016, Papua New Guinea has faced significant infrastructure deficits across crucial sectors. This infographic provides an updated assessment of the evolving landscape, examining developments, persistent challenges, and strategic responses in transport, energy, ICT, and WASH, highlighting the nation's journey towards a more prosperous and resilient future. Explore AI-powered insights by clicking the ✨ buttons!
                 </p>
             </section>
-
             <section id="national-strategies" class="mb-12">
                 <h2 class="section-title">Overarching National Strategies</h2>
                 <p class="mb-6 text-gray-700">PNG's infrastructure development is guided by ambitious national plans aiming for transformative economic and social growth. These strategies outline key priorities and targets to address long-standing deficits.</p>
@@ -168,7 +164,6 @@ def get_streamlit_app_content(groq_api_key_js): # Renamed parameter
                     </div>
                 </div>
             </section>
-
             <section id="telecom" class="mb-12">
                 <h2 class="section-title">Telecommunications & ICT</h2>
                 <p class="mb-6 text-gray-700">The ICT sector is crucial for PNG's development, with efforts focused on increasing connectivity, affordability, and leveraging digital transformation. However, significant gaps remain, particularly in rural access and cost.</p>
@@ -199,7 +194,6 @@ def get_streamlit_app_content(groq_api_key_js): # Renamed parameter
                     </div>
                 </div>
             </section>
-
             <section id="transport" class="mb-12">
                 <h2 class="section-title">Transport Infrastructure</h2>
                 <p class="mb-6 text-gray-700">Transport is vital for PNG's connectivity and economy. Ambitious programs like "Connect PNG" aim to address vast road network deficiencies, while ports and aviation sectors are also seeing significant upgrades.</p>
@@ -250,7 +244,6 @@ def get_streamlit_app_content(groq_api_key_js): # Renamed parameter
                     </div>
                 </div>
             </section>
-
             <section id="energy" class="mb-12">
                 <h2 class="section-title">Energy Infrastructure</h2>
                 <p class="mb-6 text-gray-700">Access to reliable and affordable electricity is a critical challenge. PNG aims to increase access significantly and shift towards renewable energy, but the state utility PPL faces major operational and financial hurdles.</p>
@@ -285,7 +278,6 @@ def get_streamlit_app_content(groq_api_key_js): # Renamed parameter
                     </div>
                 </div>
             </section>
-
             <section id="wash" class="mb-12">
                 <h2 class="section-title">Water, Sanitation & Hygiene (WASH)</h2>
                 <p class="mb-6 text-gray-700">Access to safe water and sanitation remains critically low, posing significant public health challenges. Efforts are underway to improve services, but issues like low investment, aging infrastructure, and cost recovery persist.</p>
@@ -318,7 +310,6 @@ def get_streamlit_app_content(groq_api_key_js): # Renamed parameter
                     </div>
                 </div>
             </section>
-
             <section id="cross-cutting" class="mb-12">
                 <h2 class="section-title">Cross-Cutting Enablers & Themes</h2>
                 <p class="mb-6 text-gray-700">Several overarching factors influence PNG's ability to develop and maintain its infrastructure, including funding mechanisms, climate resilience, and the performance of state-owned enterprises.</p>
@@ -361,7 +352,6 @@ def get_streamlit_app_content(groq_api_key_js): # Renamed parameter
                     <p class="stat-context text-center mt-4">Aim: Transform SOEs into profitable, efficient service providers with good governance.</p>
                 </div>
             </section>
-
             <section id="conclusion" class="mb-12">
                 <h2 class="section-title">Conclusion: Opportunities, Risks & The Path Forward</h2>
                 <p class="mb-6 text-gray-700">PNG is at a critical juncture. Ambitious strategies and international support offer significant opportunities, but substantial risks related to funding, governance, capacity, and climate change must be managed to ensure sustainable infrastructure development and improve citizens' lives.</p>
@@ -393,14 +383,12 @@ def get_streamlit_app_content(groq_api_key_js): # Renamed parameter
                 </p>
             </section>
         </main>
-
         <footer class="bg-[#073B4C] text-white py-6 mt-12">
             <div class="container mx-auto px-4 text-center">
                 <p class="text-sm">© 2025 PNG Infrastructure Infographic. Data based on "INFRASTRUCTURE CHALLENGES FOR PAPUA NEW GUINEA’S FUTURE: AN UPDATED ASSESSMENT (Post-2015 Developments)".</p>
                 <p class="text-xs mt-1">This is a visual representation and interpretation of complex data for illustrative purposes. AI-generated content requires verification.</p>
             </div>
         </footer>
-
         <div id="geminiModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center" style="display: none;">
             <div class="bg-white p-6 rounded-lg shadow-xl w-11/12 md:max-w-md mx-auto">
                 <h3 id="geminiModalTitle" class="text-lg font-semibold mb-3 text-[#073B4C]">Loading...</h3>
@@ -411,7 +399,10 @@ def get_streamlit_app_content(groq_api_key_js): # Renamed parameter
     </div>
     """
 
-    # Meticulously check and escape all '%' in script_content_js_template
+    # Critical section: script_content_js_template
+    # The error is likely in this string.
+    # We need to ensure all literal '%' are '%%' and the API call part for Groq is correct.
+    # The API key placeholder is '%s'.
     script_content_js_template = """
         function wrapLabel(label, maxWidth = 16) {
             if (typeof label !== 'string' || label.length <= maxWidth) { return label; }
@@ -462,7 +453,7 @@ def get_streamlit_app_content(groq_api_key_js): # Renamed parameter
                 new Chart(internetCtx, { type: 'doughnut',
                     data: { labels: ['Internet Users', 'Offline Population'],
                         datasets: [{ label: 'Internet Penetration', data: [24.1, 100 - 24.1], backgroundColor: [energeticPlayfulPalette.ceruleanBlue, energeticPlayfulPalette.lightGray], borderColor: [energeticPlayfulPalette.ceruleanBlue, energeticPlayfulPalette.lightGray], borderWidth: 1 }]
-                    }, options: {...defaultChartOptions, cutout: '70%%'} // Escaped %
+                    }, options: {...defaultChartOptions, cutout: '70%%'} 
                 });
             }
             const mobileCtx = document.getElementById('mobileConnectionsChart')?.getContext('2d');
@@ -470,24 +461,24 @@ def get_streamlit_app_content(groq_api_key_js): # Renamed parameter
                 new Chart(mobileCtx, { type: 'doughnut',
                     data: { labels: ['Mobile Connections', 'No Connection'],
                         datasets: [{ label: 'Mobile Connections', data: [47.2, 100 - 47.2], backgroundColor: [energeticPlayfulPalette.tealishGreen, energeticPlayfulPalette.lightGray], borderColor: [energeticPlayfulPalette.tealishGreen, energeticPlayfulPalette.lightGray], borderWidth: 1 }]
-                    }, options: {...defaultChartOptions, cutout: '70%%'} // Escaped %
+                    }, options: {...defaultChartOptions, cutout: '70%%'} 
                 });
             }
             const affordabilityCtx = document.getElementById('internetAffordabilityChart')?.getContext('2d');
             if (affordabilityCtx) {
                 new Chart(affordabilityCtx, { type: 'bar',
-                    data: { labels: [wrapLabel('PNG Cost (%% GNI per capita)'), wrapLabel('Target Cost (%% GNI per capita)')], // Escaped %
+                    data: { labels: [wrapLabel('PNG Cost (%% GNI per capita)'), wrapLabel('Target Cost (%% GNI per capita)')], 
                         datasets: [{ label: 'Internet Basket Cost', data: [12.04, 2], backgroundColor: [energeticPlayfulPalette.coralRed, energeticPlayfulPalette.sunnyYellow], borderColor: [energeticPlayfulPalette.coralRed, energeticPlayfulPalette.sunnyYellow], borderWidth: 1 }]
                     },
                     options: { ...defaultChartOptions, indexAxis: 'y',
-                         scales: { x: { ticks: { color: '#073B4C', font: {size: 10}, callback: function(value) { return value + '%%' } }, grid: { color: '#E2E8F0' } }, // Escaped %
+                         scales: { x: { ticks: { color: '#073B4C', font: {size: 10}, callback: function(value) { return value + '%%' } }, grid: { color: '#E2E8F0' } }, 
                                    y: { ticks: { color: '#073B4C', font: {size: 10} }, grid: {display: false} } },
                         plugins: { ...defaultChartOptions.plugins, tooltip: { callbacks: {
                                      title: function(tooltipItems) { 
                                         const item = tooltipItems[0]; if (!item || !item.chart || !item.chart.data || !item.chart.data.labels || typeof item.dataIndex === 'undefined') return '';
                                         let label = item.chart.data.labels[item.dataIndex]; if (Array.isArray(label)) { return label.join(' '); } return label;
                                     },
-                                    label: function(context) { return context.dataset.label + ': ' + context.raw + '%%'; } // Escaped %
+                                    label: function(context) { return context.dataset.label + ': ' + context.raw + '%%'; } 
                         }}}
                     }
                 });
@@ -497,7 +488,7 @@ def get_streamlit_app_content(groq_api_key_js): # Renamed parameter
                 new Chart(roadConditionCtx, { type: 'doughnut',
                     data: { labels: ['Poor Condition', 'Fair/Good Condition'],
                         datasets: [{ label: 'Road Network Condition', data: [85, 15], backgroundColor: [energeticPlayfulPalette.coralRed, energeticPlayfulPalette.tealishGreen], borderColor: [energeticPlayfulPalette.coralRed, energeticPlayfulPalette.tealishGreen], borderWidth: 1 }]
-                    }, options: {...defaultChartOptions, cutout: '70%%'} // Escaped %
+                    }, options: {...defaultChartOptions, cutout: '70%%'} 
                 });
             }
             const connectPngProgressCtx = document.getElementById('connectPngProgressChart')?.getContext('2d');
@@ -524,13 +515,13 @@ def get_streamlit_app_content(groq_api_key_js): # Renamed parameter
                 new Chart(electricityAccessCtx, { type: 'doughnut',
                     data: { labels: ['On-Grid Access', 'No On-Grid Access'],
                         datasets: [{ label: 'Electricity Access', data: [15, 85], backgroundColor: [energeticPlayfulPalette.sunnyYellow, energeticPlayfulPalette.lightGray], borderColor: [energeticPlayfulPalette.sunnyYellow, energeticPlayfulPalette.lightGray], borderWidth: 1 }]
-                    }, options: {...defaultChartOptions, cutout: '70%%'} // Escaped %
+                    }, options: {...defaultChartOptions, cutout: '70%%'} 
                 });
             }
             const generationMixCtx = document.getElementById('generationMixChart')?.getContext('2d');
             if (generationMixCtx) {
                 new Chart(generationMixCtx, { type: 'pie',
-                    data: { labels: ['Hydropower (39.7%%)', 'Diesel (37.4%%)', 'Fossil Gas (14.1%%)', 'Geothermal (9.1%%)', 'Solar (~1%%)'], // Escaped %
+                    data: { labels: ['Hydropower (39.7%%)', 'Diesel (37.4%%)', 'Fossil Gas (14.1%%)', 'Geothermal (9.1%%)', 'Solar (~1%%)'], 
                         datasets: [{ label: 'On-Grid Generation Mix', data: [39.7, 37.4, 14.1, 9.1, 1], 
                             backgroundColor: [ energeticPlayfulPalette.ceruleanBlue, energeticPlayfulPalette.coralRed, energeticPlayfulPalette.darkSlateBlue, energeticPlayfulPalette.sunnyYellow, energeticPlayfulPalette.tealishGreen ], borderWidth: 1 }]
                     }, options: {...defaultChartOptions, plugins: { ...defaultChartOptions.plugins, legend: { position: 'right', labels: {color: '#073B4C', font: {size:9}, boxWidth:15}}}}
@@ -541,7 +532,7 @@ def get_streamlit_app_content(groq_api_key_js): # Renamed parameter
                 new Chart(waterAccessCtx, { type: 'doughnut',
                     data: { labels: ['Improved Water', 'Unimproved/Surface Water'],
                         datasets: [{ label: 'Access to Improved Drinking Water', data: [45, 55], backgroundColor: [energeticPlayfulPalette.ceruleanBlue, energeticPlayfulPalette.lightGray], borderColor: [energeticPlayfulPalette.ceruleanBlue, energeticPlayfulPalette.lightGray], borderWidth: 1 }]
-                    }, options: {...defaultChartOptions, cutout: '70%%'} // Escaped %
+                    }, options: {...defaultChartOptions, cutout: '70%%'} 
                 });
             }
             const sanitationAccessCtx = document.getElementById('sanitationAccessChart')?.getContext('2d');
@@ -549,7 +540,7 @@ def get_streamlit_app_content(groq_api_key_js): # Renamed parameter
                 new Chart(sanitationAccessCtx, { type: 'doughnut',
                     data: { labels: ['Improved Sanitation', 'Unimproved/Open Defecation'],
                         datasets: [{ label: 'Access to Improved Sanitation', data: [29, 71], backgroundColor: [energeticPlayfulPalette.tealishGreen, energeticPlayfulPalette.lightGray], borderColor: [energeticPlayfulPalette.tealishGreen, energeticPlayfulPalette.lightGray], borderWidth: 1 }]
-                    }, options: {...defaultChartOptions, cutout: '70%%'} // Escaped %
+                    }, options: {...defaultChartOptions, cutout: '70%%'} 
                 });
             }
         }
@@ -557,20 +548,21 @@ def get_streamlit_app_content(groq_api_key_js): # Renamed parameter
         if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initializeCharts); } 
         else { initializeCharts(); }
 
-        const aiModal = document.getElementById('geminiModal'); // Consider renaming ID if class names were changed
+        const aiModal = document.getElementById('geminiModal'); 
         const aiModalTitle = document.getElementById('geminiModalTitle');
         const aiModalContent = document.getElementById('geminiModalContent');
         const aiModalClose = document.getElementById('geminiModalClose');
 
         if (aiModalClose) { aiModalClose.addEventListener('click', () => { if (aiModal) aiModal.style.display = 'none'; }); }
 
-        function showAIModal(title, content) { // Renamed from showGeminiModal
+        function showAIModal(title, content) { 
             if (aiModalTitle) aiModalTitle.textContent = title;
             if (aiModalContent) aiModalContent.innerHTML = content.replace(/\\n/g, '<br>'); 
             if (aiModal) aiModal.style.display = 'flex';
         }
         
-        window.fetchAIResponse = async function(context, type, responseElementId) { // Renamed from fetchGeminiData
+        // Renamed from fetchGeminiData to fetchAIResponse
+        window.fetchAIResponse = async function(context, type, responseElementId) { 
             const responseElement = document.getElementById(responseElementId);
             if (responseElement) { responseElement.style.display = 'none'; responseElement.innerHTML = ''; }
             showAIModal('✨ AI Assistant Loading...', 'Fetching insights from Llama 3.1 via Groq API. Please wait...');
@@ -584,38 +576,35 @@ def get_streamlit_app_content(groq_api_key_js): # Renamed parameter
                 }
             } else if (type === 'innovativeSolutions') {
                 if (context === 'lowEnergyAccess') {
-                    prompt = "You are a sustainable development expert. For Papua New Guinea, where on-grid electricity access is below 15%%, suggest 3 innovative and context-appropriate solutions or strategies to significantly improve rural and remote electricity access, beyond traditional grid expansion. Focus on sustainability and community involvement. Present as a numbered list with brief explanations."; // Escaped %
+                    prompt = "You are a sustainable development expert. For Papua New Guinea, where on-grid electricity access is below 15%%, suggest 3 innovative and context-appropriate solutions or strategies to significantly improve rural and remote electricity access, beyond traditional grid expansion. Focus on sustainability and community involvement. Present as a numbered list with brief explanations.";
                 } else if (context === 'lowSanitationAccess') {
-                    prompt = "You are a public health and WASH (Water, Sanitation, Hygiene) specialist. For Papua New Guinea, where access to improved sanitation is very low (around 29%%), suggest 3 innovative and culturally sensitive solutions or strategies to significantly improve sanitation coverage, particularly in rural and peri-urban areas. Focus on sustainability, community participation, and health impact. Present as a numbered list with brief explanations."; // Escaped %
+                    prompt = "You are a public health and WASH (Water, Sanitation, Hygiene) specialist. For Papua New Guinea, where access to improved sanitation is very low (around 29%%), suggest 3 innovative and culturally sensitive solutions or strategies to significantly improve sanitation coverage, particularly in rural and peri-urban areas. Focus on sustainability, community participation, and health impact. Present as a numbered list with brief explanations.";
                 }
             }
 
             if (!prompt) { showAIModal('Error', 'Invalid context for AI API call.'); return; }
             
-            const apiKey = "%s"; // This is where Python injects the Groq API key
-            const modelName = "llama-3.1-70b-versatile"; // User specified model
+            const apiKey = "%s"; // API Key placeholder
+            const modelName = "llama-3.1-70b-versatile"; 
 
             if (!apiKey || apiKey === "YOUR_GROQ_API_KEY_PLACEHOLDER" || apiKey === "") { 
                  showAIModal('API Key Error', 'Groq API key is not configured. Please ensure it is set up in Streamlit secrets (if deployed) or provided in the sidebar (for local use) and refresh the page.');
                  if (responseElement) responseElement.style.display = 'none';
                  return;
             }
-            // Groq API uses OpenAI's chat completions format
-            const apiUrl = `https://api.groq.com/openai/v1/chat/completions`;
+            
+            const apiUrl = `https://api.groq.com/openai/v1/chat/completions`; // No question mark here usually
             
             const payload = {
                 messages: [{ "role": "user", "content": prompt }],
-                model: modelName,
-                // You can add other parameters like temperature, max_tokens if needed
-                // temperature: 0.7,
-                // max_tokens: 1024, 
+                model: modelName
             };
 
             try {
                 const apiResponse = await fetch(apiUrl, {
                     method: 'POST',
                     headers: { 
-                        'Authorization': `Bearer ${apiKey}`,
+                        'Authorization': `Bearer ${apiKey}`, // Corrected Bearer token format
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(payload)
@@ -656,7 +645,70 @@ def get_streamlit_app_content(groq_api_key_js): # Renamed parameter
         }
     """
 
-    actual_script_content = script_content_js_template % (groq_api_key_js if groq_api_key_js is not None else "")
+    # If the error is indeed from a '?', it's highly likely it's in the apiUrl construction, 
+    # especially if it was trying to add a query parameter like "?key=" which we removed for Groq.
+    # Let's ensure no stray '?' are near %s or in URL-like strings if they are not query params.
+    # The error "unsupported format character '?' (0xa) at index 2679" means
+    # at that specific index in the `script_content_js_template` string,
+    # there is literally a single '%' followed by a '?'.
+
+    # Count characters to find index 2679. This is hard to do manually.
+    # A common place for '?' is in URLs. Let's re-check the apiUrl line carefully.
+    # The previous Groq API URL was:
+    # const apiUrl = `https://api.groq.com/openai/v1/chat/completions`;
+    # This line itself doesn't have a '?' or a '%'.
+    # The issue must be a literal '%?' sequence somewhere else in the JS template.
+
+    # Let's assume for a moment the error character (0xa) might be misleading and it's a literal '%?'
+    # I'll scan for '%?'
+    # ... (manual scan of the JS code above) ...
+    # I don't immediately see a '%?' sequence.
+
+    # The error might be that a previously escaped '%%' was somehow reverted or a new '%' was introduced.
+    # I've re-escaped all known % in the Chart.js options and labels like '70%%'.
+
+    # One more check: Ensure the API key placeholder is truly the only single '%'.
+    if script_content_js_template.count('%s') != 1:
+        # This would be a problem with my template construction
+        st.error("Developer Error: API key placeholder count is not 1 in JS template.")
+        # For debugging, print how many %s it finds
+        # print(f"Count of '%s': {script_content_js_template.count('%s')}")
+        # print(f"Count of '%%': {script_content_js_template.count('%%')}")
+        
+        # To find single unescaped % not part of %s
+        import re
+        single_percent_errors = []
+        for i, char_val in enumerate(script_content_js_template):
+            if char_val == '%' and (i + 1 < len(script_content_js_template)):
+                next_char = script_content_js_template[i+1]
+                if next_char != '%' and next_char != 's': # if it's not '%%' and not '%s'
+                    # Check if it's the start of a valid (but unwanted here) format specifier
+                    if next_char in "diouxXeEfFgGcr": # common format specifiers
+                         single_percent_errors.append(f"Potential unescaped format specifier '%{next_char}' at index {i}")
+                    elif next_char == '?': # The specific error
+                         single_percent_errors.append(f"Found offending '%?' at index {i}")
+
+
+        if single_percent_errors:
+            st.error("Found potential unescaped '%' characters in JS template that are not '%%' or the API key placeholder '%s':")
+            for err in single_percent_errors:
+                st.error(err)
+            # This part is for debugging if the app is run locally by the developer
+            # print("SINGLE PERCENT ERRORS:", single_percent_errors)
+            # You'd then manually go to these indices in your editor.
+
+    try:
+        actual_script_content = script_content_js_template % (groq_api_key_js if groq_api_key_js is not None else "")
+    except ValueError as e:
+        st.error(f"Still encountered a ValueError during Python string formatting for JavaScript: {e}")
+        st.error("This usually means a single '%' character is in the JavaScript template that is not part of the API key placeholder ('%s') and is not escaped as '%%'. Please meticulously review the script_content_js_template.")
+        # For developer debugging:
+        # print("----- ERROR DURING JS STRING FORMATTING -----")
+        # print(e)
+        # print("----- SCRIPT TEMPLATE causing error (first 3000 chars) -----")
+        # print(script_content_js_template[:3000]) # Print a portion to help locate
+        # print("----- END SCRIPT TEMPLATE -----")
+        raise # re-raise the error to stop execution and see full Streamlit traceback
 
     full_html = f"""
         <head>
@@ -684,30 +736,32 @@ def main():
     except FileNotFoundError:
          st.sidebar.info("Local secrets.toml not found. Use sidebar input for Groq API key if needed.")
          groq_api_key = ""
-    except Exception:
+    except Exception: # Catch any other secrets-related errors
+        st.sidebar.warning("Could not read secrets. Ensure `secrets.toml` is correctly formatted if used locally, or secrets are set on the server.")
         groq_api_key = ""
 
-    st.sidebar.header("API Configuration (Groq Llama 3.1)")
-    if not groq_api_key:
-        if "GROQ_API_KEY" in st.secrets:
-             groq_api_key = st.secrets.GROQ_API_KEY
-             if groq_api_key:
-                st.sidebar.success("Groq API Key loaded from secrets.")
 
-        if not groq_api_key:
+    st.sidebar.header("API Configuration (Groq Llama 3.1)")
+    if not groq_api_key: # If not found in secrets (or secrets failed to load)
+        # Try to access directly, st.secrets acts like a dict
+        if "GROQ_API_KEY" in st.secrets and st.secrets["GROQ_API_KEY"]:
+             groq_api_key = st.secrets.GROQ_API_KEY # Use .get or direct access
+             st.sidebar.success("Groq API Key loaded from secrets.")
+        else:
             st.sidebar.warning("Groq API Key not found in Streamlit secrets.")
             groq_api_key_input = st.sidebar.text_input(
                 "Enter Groq API Key for Llama 3.1 features:", 
                 type="password", 
-                value="",
+                value="", # Ensure default is empty
                 help="Your Groq API key is used to fetch live insights via Llama 3.1."
             )
             if groq_api_key_input:
                 groq_api_key = groq_api_key_input
-            else:
+            else: # Still no key
                 st.sidebar.info("AI-powered insights (✨ buttons) will be disabled or show an error until a valid Groq API key is provided and the page is re-run.")
-    else:
+    else: # Key was successfully loaded from st.secrets.get initially
         st.sidebar.success("Groq API Key loaded from secrets.")
+
 
     st.sidebar.markdown("---")
     st.sidebar.markdown(
@@ -724,8 +778,8 @@ def main():
     st.sidebar.markdown("---")
     st.sidebar.info("Using Groq API with Llama-3.1-70b-versatile model for AI insights.")
 
-
-    html_content = get_streamlit_app_content(groq_api_key_js=groq_api_key)
+    # Ensure groq_api_key is a string before passing
+    html_content = get_streamlit_app_content(groq_api_key_js=str(groq_api_key) if groq_api_key is not None else "")
     st.markdown(html_content, unsafe_allow_html=True)
 
 if __name__ == "__main__":
