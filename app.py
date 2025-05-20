@@ -1,15 +1,14 @@
 import streamlit as st
 
-def get_streamlit_app_content(gemini_api_key_js):
+def get_streamlit_app_content(groq_api_key_js): # Renamed parameter
     """
     Generates the HTML, CSS, and JavaScript content for the Streamlit app.
-    The Gemini API key is injected into the JavaScript part.
+    The Groq API key is injected into the JavaScript part.
     """
     
     style_content = """
         body {
             font-family: 'Inter', sans-serif;
-            /* background-color: #F8F9FA; /* Streamlit handles base background, or apply to a wrapper */
             color: #073B4C;
             margin: 0;
             padding: 0;
@@ -90,9 +89,9 @@ def get_streamlit_app_content(gemini_api_key_js):
             font-size: 1.5rem;
             margin-right: 0.5rem;
         }
-        .gemini-button {
-            background-color: #FFD166; /* Sunny Yellow */
-            color: #073B4C; /* Dark Slate Blue */
+        .gemini-button { /* Will rename this class in HTML to ai-button or similar if desired */
+            background-color: #FFD166; 
+            color: #073B4C; 
             padding: 0.5rem 1rem;
             border-radius: 0.375rem;
             font-weight: 500;
@@ -101,27 +100,27 @@ def get_streamlit_app_content(gemini_api_key_js):
             transition: background-color 0.3s ease;
             border: 1px solid #E7B00B;
         }
-        .gemini-button:hover {
+        .gemini-button:hover { /* Will rename this class in HTML to ai-button or similar if desired */
             background-color: #FBC53E;
         }
-        .gemini-response-area {
+        .gemini-response-area { /* Will rename this class in HTML to ai-response-area or similar if desired */
             margin-top: 1rem;
             padding: 0.75rem;
-            background-color: #F0FDFA; /* Light teal for contrast */
+            background-color: #F0FDFA; 
             border-radius: 0.375rem;
             font-size: 0.875rem;
             color: #073B4C;
-            border: 1px solid #06D6A0; /* Tealish Green */
-            white-space: pre-wrap; /* To respect newlines from Gemini */
+            border: 1px solid #06D6A0; 
+            white-space: pre-wrap; 
         }
-        /* Ensure modal is above Streamlit's default UI elements */
-        #geminiModal {
-            z-index: 1050; /* Streamlit's header is often around 1000-1001 */
+        #geminiModal { /* Will rename this ID in HTML to aiModal or similar if desired */
+            z-index: 1050; 
         }
     """
 
+    # Meticulously check and escape all '%' in body_content_html
     body_content_html = """
-    <div style="background-color: #F8F9FA;"> <!-- Wrapper div to set background -->
+    <div style="background-color: #F8F9FA;">
         <header class="bg-[#073B4C] text-white py-8 shadow-lg">
             <div class="container mx-auto px-4 text-center">
                 <h1 class="text-4xl md:text-5xl font-bold mb-2">Papua New Guinea's Infrastructure</h1>
@@ -142,7 +141,6 @@ def get_streamlit_app_content(gemini_api_key_js):
         </nav>
 
         <main class="container mx-auto p-4 md:p-8">
-
             <section class="mb-12 text-center">
                 <p class="text-lg md:text-xl leading-relaxed max-w-3xl mx-auto text-gray-700">
                     Since 2015-2016, Papua New Guinea has faced significant infrastructure deficits across crucial sectors. This infographic provides an updated assessment of the evolving landscape, examining developments, persistent challenges, and strategic responses in transport, energy, ICT, and WASH, highlighting the nation's journey towards a more prosperous and resilient future. Explore AI-powered insights by clicking the ✨ buttons!
@@ -165,7 +163,7 @@ def get_streamlit_app_content(gemini_api_key_js):
                     </div>
                     <div class="stat-card">
                         <h3 class="stat-title">Digital ID: GDP Impact</h3>
-                        <p class="stat-value">3-5%%</p> <!-- Escaped % -->
+                        <p class="stat-value">3-5%%</p>
                         <p class="stat-context">Projected GDP increase in 3-5 years from SevisPass Digital ID.</p>
                     </div>
                 </div>
@@ -178,12 +176,12 @@ def get_streamlit_app_content(gemini_api_key_js):
                     <div class="stat-card">
                         <h3 class="stat-title">Internet Penetration</h3>
                         <div class="chart-container h-64 md:h-72"><canvas id="internetPenetrationChart"></canvas></div>
-                        <p class="stat-context text-center mt-2">~24.1%% of population (Early 2025, DataReportal)</p> <!-- Escaped % -->
+                        <p class="stat-context text-center mt-2">~24.1%% of population (Early 2025, DataReportal)</p>
                     </div>
                     <div class="stat-card">
                         <h3 class="stat-title">Mobile Connections</h3>
                         <div class="chart-container h-64 md:h-72"><canvas id="mobileConnectionsChart"></canvas></div>
-                        <p class="stat-context text-center mt-2">~47.2%% of population (Early 2025, DataReportal/GSMA)</p> <!-- Escaped % -->
+                        <p class="stat-context text-center mt-2">~47.2%% of population (Early 2025, DataReportal/GSMA)</p>
                     </div>
                     <div class="stat-card">
                         <h3 class="stat-title">Internet Affordability Challenge</h3>
@@ -205,13 +203,12 @@ def get_streamlit_app_content(gemini_api_key_js):
             <section id="transport" class="mb-12">
                 <h2 class="section-title">Transport Infrastructure</h2>
                 <p class="mb-6 text-gray-700">Transport is vital for PNG's connectivity and economy. Ambitious programs like "Connect PNG" aim to address vast road network deficiencies, while ports and aviation sectors are also seeing significant upgrades.</p>
-                
                 <h3 class="text-2xl font-semibold mb-4 mt-8 text-[#118AB2]">Roads & Bridges</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div class="stat-card">
                         <h3 class="stat-title">Road Network Condition</h3>
                         <div class="chart-container h-64 md:h-72"><canvas id="roadConditionChart"></canvas></div>
-                        <p class="stat-context text-center mt-2">Estimated 85%% in poor condition.</p> <!-- Escaped % -->
+                        <p class="stat-context text-center mt-2">Estimated 85%% in poor condition.</p>
                     </div>
                     <div class="stat-card">
                         <h3 class="stat-title">Maintenance Backlog</h3>
@@ -222,11 +219,10 @@ def get_streamlit_app_content(gemini_api_key_js):
                         <h3 class="stat-title">Connect PNG: Strategic Highway Upgrades</h3>
                         <div class="chart-container h-64 md:h-72"><canvas id="connectPngProgressChart"></canvas></div>
                         <p class="stat-context text-center mt-2">Progress on 16,200km strategic highways (Phase 1 target: 4,220km).</p>
-                        <button class="gemini-button" onclick="fetchGeminiData('connectPNG', 'risksOpportunities', 'geminiResponseConnectPNG')">✨ Analyse Risks & Opportunities</button>
+                        <button class="gemini-button" onclick="fetchAIResponse('connectPNG', 'risksOpportunities', 'geminiResponseConnectPNG')">✨ Analyse Risks & Opportunities</button>
                         <div id="geminiResponseConnectPNG" class="gemini-response-area" style="display: none;"></div>
                     </div>
                 </div>
-
                 <h3 class="text-2xl font-semibold mb-4 mt-8 text-[#118AB2]">Ports & Maritime</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="stat-card">
@@ -240,7 +236,6 @@ def get_streamlit_app_content(gemini_api_key_js):
                          <p class="text-gray-700 mt-2"><span class="icon-placeholder">🇪🇺</span>EU developing major investment for Rabaul port renovation and greening.</p>
                     </div>
                 </div>
-
                 <h3 class="text-2xl font-semibold mb-4 mt-8 text-[#118AB2]">Aviation</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="stat-card">
@@ -263,14 +258,14 @@ def get_streamlit_app_content(gemini_api_key_js):
                     <div class="stat-card">
                         <h3 class="stat-title">On-Grid Electricity Access</h3>
                         <div class="chart-container h-64 md:h-72"><canvas id="electricityAccessChart"></canvas></div>
-                        <p class="stat-context text-center mt-2">Below 15%% of population. Target: 70%% by 2030.</p> <!-- Escaped % -->
-                        <button class="gemini-button" onclick="fetchGeminiData('lowEnergyAccess', 'innovativeSolutions', 'geminiResponseEnergyAccess')">✨ Suggest Innovative Solutions</button>
+                        <p class="stat-context text-center mt-2">Below 15%% of population. Target: 70%% by 2030.</p>
+                        <button class="gemini-button" onclick="fetchAIResponse('lowEnergyAccess', 'innovativeSolutions', 'geminiResponseEnergyAccess')">✨ Suggest Innovative Solutions</button>
                         <div id="geminiResponseEnergyAccess" class="gemini-response-area" style="display: none;"></div>
                     </div>
                     <div class="stat-card">
-                        <h3 class="stat-title">Generation Mix (On-Grid, ~580-600MW Total)</h3 >
+                        <h3 class="stat-title">Generation Mix (On-Grid, ~580-600MW Total)</h3>
                         <div class="chart-container h-64 md:h-72"><canvas id="generationMixChart"></canvas></div>
-                        <p class="stat-context text-center mt-2">Dominated by Hydropower and Diesel. Aim: 78%% renewables by 2030.</p> <!-- Escaped % -->
+                        <p class="stat-context text-center mt-2">Dominated by Hydropower and Diesel. Aim: 78%% renewables by 2030.</p>
                     </div>
                     <div class="stat-card">
                         <h3 class="stat-title">PNG Power Ltd (PPL) Loss</h3>
@@ -285,7 +280,7 @@ def get_streamlit_app_content(gemini_api_key_js):
                             <li><span class="icon-placeholder">☀️</span><strong>Renewable Focus:</strong> Planned projects include Naoro Brown & Ramu 2 hydro, Edevu hydro, Markham Valley solar & biomass.</li>
                             <li><span class="icon-placeholder">🔧</span><strong>PPL Reforms:</strong> KCH planning restructure, NEA now regulatory body. Significant investment needed for plant/network upgrades.</li>
                         </ul>
-                        <button class="gemini-button" onclick="fetchGeminiData('majorRenewableProject', 'risksOpportunities', 'geminiResponseRenewableProject')">✨ Analyse Major Renewable Project R&O</button>
+                        <button class="gemini-button" onclick="fetchAIResponse('majorRenewableProject', 'risksOpportunities', 'geminiResponseRenewableProject')">✨ Analyse Major Renewable Project R&O</button>
                         <div id="geminiResponseRenewableProject" class="gemini-response-area" style="display: none;"></div>
                     </div>
                 </div>
@@ -298,18 +293,18 @@ def get_streamlit_app_content(gemini_api_key_js):
                     <div class="stat-card">
                         <h3 class="stat-title">Access to Improved Drinking Water</h3>
                         <div class="chart-container h-64 md:h-72"><canvas id="waterAccessChart"></canvas></div>
-                        <p class="stat-context text-center mt-2">Less than 50%% of households (DHS 2016-18).</p> <!-- Escaped % -->
+                        <p class="stat-context text-center mt-2">Less than 50%% of households (DHS 2016-18).</p>
                     </div>
                     <div class="stat-card">
                         <h3 class="stat-title">Access to Improved Sanitation</h3>
                         <div class="chart-container h-64 md:h-72"><canvas id="sanitationAccessChart"></canvas></div>
-                        <p class="stat-context text-center mt-2">Only 29%% of households (DHS 2016-18).</p> <!-- Escaped % -->
-                        <button class="gemini-button" onclick="fetchGeminiData('lowSanitationAccess', 'innovativeSolutions', 'geminiResponseSanitation')">✨ Suggest Innovative Solutions</button>
+                        <p class="stat-context text-center mt-2">Only 29%% of households (DHS 2016-18).</p>
+                        <button class="gemini-button" onclick="fetchAIResponse('lowSanitationAccess', 'innovativeSolutions', 'geminiResponseSanitation')">✨ Suggest Innovative Solutions</button>
                         <div id="geminiResponseSanitation" class="gemini-response-area" style="display: none;"></div>
                     </div>
                     <div class="stat-card">
                         <h3 class="stat-title">Water PNG: Non-Revenue Water</h3>
-                         <p class="stat-value">~52%%</p> <!-- Escaped % -->
+                         <p class="stat-value">~52%%</p>
                         <p class="stat-context">High NRW due to leaks, illegal connections, aging infrastructure.</p>
                     </div>
                     <div class="stat-card md:col-span-2 lg:col-span-3">
@@ -331,10 +326,9 @@ def get_streamlit_app_content(gemini_api_key_js):
                     <div class="stat-card">
                         <h3 class="stat-title">Infrastructure Funding (2025 Budget)</h3>
                         <p class="stat-value">K7.6 Billion</p>
-                        <p class="stat-context">Announced for infrastructure development, a 273%% increase from 2018.</p> <!-- Escaped % -->
+                        <p class="stat-context">Announced for infrastructure development, a 273%% increase from 2018.</p>
                          <p class="text-sm text-gray-700 mt-4">Significant international partnerships (ADB, World Bank, Australia/AIFFP, EU, China) are crucial for financing major projects.</p>
                     </div>
-
                     <div class="stat-card">
                         <h3 class="stat-title">Climate Change & Resilience</h3>
                         <p class="text-gray-700"><span class="icon-placeholder">🌍</span>PNG is acutely vulnerable. National Adaptation Plan (NAP) prioritises transport & infrastructure.</p>
@@ -398,7 +392,6 @@ def get_streamlit_app_content(gemini_api_key_js):
                     The path forward requires steadfast commitment to strategic frameworks, robust governance, transparent procurement, and a clear focus on long-term sustainability and equitable benefit distribution for all citizens.
                 </p>
             </section>
-            
         </main>
 
         <footer class="bg-[#073B4C] text-white py-6 mt-12">
@@ -408,23 +401,20 @@ def get_streamlit_app_content(gemini_api_key_js):
             </div>
         </footer>
 
-        <div id="geminiModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center" style="display: none;"> <!-- z-index is in <style> -->
+        <div id="geminiModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center" style="display: none;">
             <div class="bg-white p-6 rounded-lg shadow-xl w-11/12 md:max-w-md mx-auto">
                 <h3 id="geminiModalTitle" class="text-lg font-semibold mb-3 text-[#073B4C]">Loading...</h3>
                 <div id="geminiModalContent" class="text-sm text-gray-700 max-h-60 overflow-y-auto"></div>
                 <button id="geminiModalClose" class="mt-4 bg-[#118AB2] text-white px-4 py-2 rounded hover:bg-[#0F789D] w-full">Close</button>
             </div>
         </div>
-    </div> <!-- End of wrapper div -->
+    </div>
     """
 
-    # JavaScript content - API key will be injected into this string
-    # Literal % signs in JS are escaped as %% for Python's % formatting
+    # Meticulously check and escape all '%' in script_content_js_template
     script_content_js_template = """
         function wrapLabel(label, maxWidth = 16) {
-            if (typeof label !== 'string' || label.length <= maxWidth) {
-                return label;
-            }
+            if (typeof label !== 'string' || label.length <= maxWidth) { return label; }
             const words = label.split(' ');
             let currentLine = '';
             const lines = [];
@@ -435,318 +425,155 @@ def get_streamlit_app_content(gemini_api_key_js):
                 }
                 currentLine += word + ' ';
             }
-            if (currentLine.trim().length > 0) {
-                lines.push(currentLine.trim());
-            }
+            if (currentLine.trim().length > 0) { lines.push(currentLine.trim()); }
             return lines.length > 0 ? lines : [label];
         }
 
         const defaultChartOptions = {
-            responsive: true,
-            maintainAspectRatio: false,
+            responsive: true, maintainAspectRatio: false,
             plugins: {
-                legend: {
-                    position: 'bottom',
-                    labels: {
-                        color: '#073B4C',
-                        font: { size: 10 }
-                    }
-                },
+                legend: { position: 'bottom', labels: { color: '#073B4C', font: { size: 10 } } },
                 tooltip: {
                     callbacks: {
                         title: function(tooltipItems) {
                             const item = tooltipItems[0];
                             if (!item || !item.chart || !item.chart.data || !item.chart.data.labels || typeof item.dataIndex === 'undefined') return '';
                             let label = item.chart.data.labels[item.dataIndex];
-                            if (Array.isArray(label)) {
-                              return label.join(' ');
-                            }
+                            if (Array.isArray(label)) { return label.join(' '); }
                             return label;
                         }
                     }
                 }
             },
             scales: {
-                y: {
-                    ticks: { color: '#073B4C', font: { size: 10 } },
-                    grid: { color: '#E2E8F0' }
-                },
-                x: {
-                    ticks: { color: '#073B4C', font: { size: 10 } },
-                    grid: { display: false }
-                }
+                y: { ticks: { color: '#073B4C', font: { size: 10 } }, grid: { color: '#E2E8F0' } },
+                x: { ticks: { color: '#073B4C', font: { size: 10 } }, grid: { display: false } }
             }
         };
 
         const energeticPlayfulPalette = {
-            coralRed: '#FF6B6B',
-            sunnyYellow: '#FFD166',
-            tealishGreen: '#06D6A0',
-            ceruleanBlue: '#118AB2',
-            darkSlateBlue: '#073B4C',
-            lightGray: '#F8F9FA'
+            coralRed: '#FF6B6B', sunnyYellow: '#FFD166', tealishGreen: '#06D6A0',
+            ceruleanBlue: '#118AB2', darkSlateBlue: '#073B4C', lightGray: '#F8F9FA'
         };
         
         function initializeCharts() {
             const internetCtx = document.getElementById('internetPenetrationChart')?.getContext('2d');
             if (internetCtx) {
-                new Chart(internetCtx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['Internet Users', 'Offline Population'],
-                        datasets: [{
-                            label: 'Internet Penetration',
-                            data: [24.1, 100 - 24.1],
-                            backgroundColor: [energeticPlayfulPalette.ceruleanBlue, energeticPlayfulPalette.lightGray],
-                            borderColor: [energeticPlayfulPalette.ceruleanBlue, energeticPlayfulPalette.lightGray],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {...defaultChartOptions, cutout: '70%%'} // Escaped %
+                new Chart(internetCtx, { type: 'doughnut',
+                    data: { labels: ['Internet Users', 'Offline Population'],
+                        datasets: [{ label: 'Internet Penetration', data: [24.1, 100 - 24.1], backgroundColor: [energeticPlayfulPalette.ceruleanBlue, energeticPlayfulPalette.lightGray], borderColor: [energeticPlayfulPalette.ceruleanBlue, energeticPlayfulPalette.lightGray], borderWidth: 1 }]
+                    }, options: {...defaultChartOptions, cutout: '70%%'} // Escaped %
                 });
             }
-
             const mobileCtx = document.getElementById('mobileConnectionsChart')?.getContext('2d');
             if (mobileCtx) {
-                new Chart(mobileCtx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['Mobile Connections', 'No Connection'],
-                        datasets: [{
-                            label: 'Mobile Connections',
-                            data: [47.2, 100 - 47.2],
-                            backgroundColor: [energeticPlayfulPalette.tealishGreen, energeticPlayfulPalette.lightGray],
-                            borderColor: [energeticPlayfulPalette.tealishGreen, energeticPlayfulPalette.lightGray],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {...defaultChartOptions, cutout: '70%%'} // Escaped %
+                new Chart(mobileCtx, { type: 'doughnut',
+                    data: { labels: ['Mobile Connections', 'No Connection'],
+                        datasets: [{ label: 'Mobile Connections', data: [47.2, 100 - 47.2], backgroundColor: [energeticPlayfulPalette.tealishGreen, energeticPlayfulPalette.lightGray], borderColor: [energeticPlayfulPalette.tealishGreen, energeticPlayfulPalette.lightGray], borderWidth: 1 }]
+                    }, options: {...defaultChartOptions, cutout: '70%%'} // Escaped %
                 });
             }
-            
             const affordabilityCtx = document.getElementById('internetAffordabilityChart')?.getContext('2d');
             if (affordabilityCtx) {
-                new Chart(affordabilityCtx, {
-                    type: 'bar',
-                    data: {
-                        labels: [wrapLabel('PNG Cost (%% GNI per capita)'), wrapLabel('Target Cost (%% GNI per capita)')], // Escaped %
-                        datasets: [{
-                            label: 'Internet Basket Cost',
-                            data: [12.04, 2], 
-                            backgroundColor: [energeticPlayfulPalette.coralRed, energeticPlayfulPalette.sunnyYellow],
-                            borderColor: [energeticPlayfulPalette.coralRed, energeticPlayfulPalette.sunnyYellow],
-                            borderWidth: 1
-                        }]
+                new Chart(affordabilityCtx, { type: 'bar',
+                    data: { labels: [wrapLabel('PNG Cost (%% GNI per capita)'), wrapLabel('Target Cost (%% GNI per capita)')], // Escaped %
+                        datasets: [{ label: 'Internet Basket Cost', data: [12.04, 2], backgroundColor: [energeticPlayfulPalette.coralRed, energeticPlayfulPalette.sunnyYellow], borderColor: [energeticPlayfulPalette.coralRed, energeticPlayfulPalette.sunnyYellow], borderWidth: 1 }]
                     },
-                    options: {
-                        ...defaultChartOptions,
-                        indexAxis: 'y',
-                         scales: {
-                            x: { 
-                                ticks: { color: '#073B4C', font: {size: 10}, callback: function(value) { return value + '%%' } }, // Escaped %
-                                grid: { color: '#E2E8F0' }
-                            },
-                            y: { ticks: { color: '#073B4C', font: {size: 10} }, grid: {display: false} }
-                        },
-                        plugins: {
-                            ...defaultChartOptions.plugins,
-                            tooltip: {
-                                callbacks: {
+                    options: { ...defaultChartOptions, indexAxis: 'y',
+                         scales: { x: { ticks: { color: '#073B4C', font: {size: 10}, callback: function(value) { return value + '%%' } }, grid: { color: '#E2E8F0' } }, // Escaped %
+                                   y: { ticks: { color: '#073B4C', font: {size: 10} }, grid: {display: false} } },
+                        plugins: { ...defaultChartOptions.plugins, tooltip: { callbacks: {
                                      title: function(tooltipItems) { 
-                                        const item = tooltipItems[0];
-                                        if (!item || !item.chart || !item.chart.data || !item.chart.data.labels || typeof item.dataIndex === 'undefined') return '';
-                                        let label = item.chart.data.labels[item.dataIndex];
-                                        if (Array.isArray(label)) { return label.join(' '); }
-                                        return label;
+                                        const item = tooltipItems[0]; if (!item || !item.chart || !item.chart.data || !item.chart.data.labels || typeof item.dataIndex === 'undefined') return '';
+                                        let label = item.chart.data.labels[item.dataIndex]; if (Array.isArray(label)) { return label.join(' '); } return label;
                                     },
-                                    label: function(context) {
-                                        return context.dataset.label + ': ' + context.raw + '%%'; // Escaped %
-                                    }
-                                }
-                            }
-                        }
+                                    label: function(context) { return context.dataset.label + ': ' + context.raw + '%%'; } // Escaped %
+                        }}}
                     }
                 });
             }
-
             const roadConditionCtx = document.getElementById('roadConditionChart')?.getContext('2d');
             if (roadConditionCtx) {
-                new Chart(roadConditionCtx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['Poor Condition', 'Fair/Good Condition'],
-                        datasets: [{
-                            label: 'Road Network Condition',
-                            data: [85, 15],
-                            backgroundColor: [energeticPlayfulPalette.coralRed, energeticPlayfulPalette.tealishGreen],
-                            borderColor: [energeticPlayfulPalette.coralRed, energeticPlayfulPalette.tealishGreen],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {...defaultChartOptions, cutout: '70%%'} // Escaped %
+                new Chart(roadConditionCtx, { type: 'doughnut',
+                    data: { labels: ['Poor Condition', 'Fair/Good Condition'],
+                        datasets: [{ label: 'Road Network Condition', data: [85, 15], backgroundColor: [energeticPlayfulPalette.coralRed, energeticPlayfulPalette.tealishGreen], borderColor: [energeticPlayfulPalette.coralRed, energeticPlayfulPalette.tealishGreen], borderWidth: 1 }]
+                    }, options: {...defaultChartOptions, cutout: '70%%'} // Escaped %
                 });
             }
-
             const connectPngProgressCtx = document.getElementById('connectPngProgressChart')?.getContext('2d');
             if (connectPngProgressCtx) {
-                new Chart(connectPngProgressCtx, {
-                    type: 'bar',
-                    data: {
-                        labels: [wrapLabel('Upgraded Strategic Highways (km)')],
-                        datasets: [
-                            {
-                                label: 'Achieved',
-                                data: [3500], 
-                                backgroundColor: energeticPlayfulPalette.ceruleanBlue,
-                            },
-                            {
-                                label: 'Phase 1 Target Remaining', 
-                                data: [4220 - 3500], 
-                                backgroundColor: energeticPlayfulPalette.lightGray,
-                            }
-                        ]
+                new Chart(connectPngProgressCtx, { type: 'bar',
+                    data: { labels: [wrapLabel('Upgraded Strategic Highways (km)')],
+                        datasets: [ { label: 'Achieved', data: [3500], backgroundColor: energeticPlayfulPalette.ceruleanBlue, }, { label: 'Phase 1 Target Remaining', data: [4220 - 3500], backgroundColor: energeticPlayfulPalette.lightGray, } ]
                     },
-                    options: {
-                        ...defaultChartOptions,
-                        indexAxis: 'y',
-                        scales: {
-                            x: { stacked: true, ticks: { color: '#073B4C', font: {size: 10} }, grid: { color: '#E2E8F0' } },
-                            y: { stacked: true, ticks: { color: '#073B4C', font: {size: 10} }, grid: {display: false} }
-                        },
-                        plugins: {
-                            ...defaultChartOptions.plugins,
-                            tooltip: {
-                                callbacks: {
+                    options: { ...defaultChartOptions, indexAxis: 'y',
+                        scales: { x: { stacked: true, ticks: { color: '#073B4C', font: {size: 10} }, grid: { color: '#E2E8F0' } },
+                                  y: { stacked: true, ticks: { color: '#073B4C', font: {size: 10} }, grid: {display: false} } },
+                        plugins: { ...defaultChartOptions.plugins, tooltip: { callbacks: {
                                     title: function(tooltipItems) { 
-                                        const item = tooltipItems[0];
-                                        if (!item || !item.chart || !item.chart.data || !item.chart.data.labels || typeof item.dataIndex === 'undefined') return '';
-                                        let label = item.chart.data.labels[item.dataIndex];
-                                        if (Array.isArray(label)) { return label.join(' '); }
-                                        return label;
+                                        const item = tooltipItems[0]; if (!item || !item.chart || !item.chart.data || !item.chart.data.labels || typeof item.dataIndex === 'undefined') return '';
+                                        let label = item.chart.data.labels[item.dataIndex]; if (Array.isArray(label)) { return label.join(' '); } return label;
                                     },
-                                    label: function(context) {
-                                        return context.dataset.label + ': ' + context.raw.toLocaleString() + ' km';
-                                    }
-                                }
-                            }
-                        }
+                                    label: function(context) { return context.dataset.label + ': ' + context.raw.toLocaleString() + ' km'; }
+                        }}}
                     }
                 });
             }
-            
             const electricityAccessCtx = document.getElementById('electricityAccessChart')?.getContext('2d');
             if (electricityAccessCtx) {
-                new Chart(electricityAccessCtx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['On-Grid Access', 'No On-Grid Access'],
-                        datasets: [{
-                            label: 'Electricity Access',
-                            data: [15, 85], 
-                            backgroundColor: [energeticPlayfulPalette.sunnyYellow, energeticPlayfulPalette.lightGray],
-                            borderColor: [energeticPlayfulPalette.sunnyYellow, energeticPlayfulPalette.lightGray],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {...defaultChartOptions, cutout: '70%%'} // Escaped %
+                new Chart(electricityAccessCtx, { type: 'doughnut',
+                    data: { labels: ['On-Grid Access', 'No On-Grid Access'],
+                        datasets: [{ label: 'Electricity Access', data: [15, 85], backgroundColor: [energeticPlayfulPalette.sunnyYellow, energeticPlayfulPalette.lightGray], borderColor: [energeticPlayfulPalette.sunnyYellow, energeticPlayfulPalette.lightGray], borderWidth: 1 }]
+                    }, options: {...defaultChartOptions, cutout: '70%%'} // Escaped %
                 });
             }
-
             const generationMixCtx = document.getElementById('generationMixChart')?.getContext('2d');
             if (generationMixCtx) {
-                new Chart(generationMixCtx, {
-                    type: 'pie',
-                    data: { // Escaped % in labels
-                        labels: ['Hydropower (39.7%%)', 'Diesel (37.4%%)', 'Fossil Gas (14.1%%)', 'Geothermal (9.1%%)', 'Solar (~1%%)'],
-                        datasets: [{
-                            label: 'On-Grid Generation Mix',
-                            data: [39.7, 37.4, 14.1, 9.1, 1], 
-                            backgroundColor: [
-                                energeticPlayfulPalette.ceruleanBlue,
-                                energeticPlayfulPalette.coralRed,
-                                energeticPlayfulPalette.darkSlateBlue,
-                                energeticPlayfulPalette.sunnyYellow,
-                                energeticPlayfulPalette.tealishGreen
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {...defaultChartOptions, 
-                        plugins: {
-                            ...defaultChartOptions.plugins,
-                            legend: { position: 'right', labels: {color: '#073B4C', font: {size:9}, boxWidth:15}}
-                        }
-                    }
+                new Chart(generationMixCtx, { type: 'pie',
+                    data: { labels: ['Hydropower (39.7%%)', 'Diesel (37.4%%)', 'Fossil Gas (14.1%%)', 'Geothermal (9.1%%)', 'Solar (~1%%)'], // Escaped %
+                        datasets: [{ label: 'On-Grid Generation Mix', data: [39.7, 37.4, 14.1, 9.1, 1], 
+                            backgroundColor: [ energeticPlayfulPalette.ceruleanBlue, energeticPlayfulPalette.coralRed, energeticPlayfulPalette.darkSlateBlue, energeticPlayfulPalette.sunnyYellow, energeticPlayfulPalette.tealishGreen ], borderWidth: 1 }]
+                    }, options: {...defaultChartOptions, plugins: { ...defaultChartOptions.plugins, legend: { position: 'right', labels: {color: '#073B4C', font: {size:9}, boxWidth:15}}}}
                 });
             }
-
             const waterAccessCtx = document.getElementById('waterAccessChart')?.getContext('2d');
             if (waterAccessCtx) {
-                new Chart(waterAccessCtx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['Improved Water', 'Unimproved/Surface Water'],
-                        datasets: [{
-                            label: 'Access to Improved Drinking Water',
-                            data: [45, 55], 
-                            backgroundColor: [energeticPlayfulPalette.ceruleanBlue, energeticPlayfulPalette.lightGray],
-                            borderColor: [energeticPlayfulPalette.ceruleanBlue, energeticPlayfulPalette.lightGray],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {...defaultChartOptions, cutout: '70%%'} // Escaped %
+                new Chart(waterAccessCtx, { type: 'doughnut',
+                    data: { labels: ['Improved Water', 'Unimproved/Surface Water'],
+                        datasets: [{ label: 'Access to Improved Drinking Water', data: [45, 55], backgroundColor: [energeticPlayfulPalette.ceruleanBlue, energeticPlayfulPalette.lightGray], borderColor: [energeticPlayfulPalette.ceruleanBlue, energeticPlayfulPalette.lightGray], borderWidth: 1 }]
+                    }, options: {...defaultChartOptions, cutout: '70%%'} // Escaped %
                 });
             }
-
             const sanitationAccessCtx = document.getElementById('sanitationAccessChart')?.getContext('2d');
             if (sanitationAccessCtx) {
-                new Chart(sanitationAccessCtx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['Improved Sanitation', 'Unimproved/Open Defecation'],
-                        datasets: [{
-                            label: 'Access to Improved Sanitation',
-                            data: [29, 71], 
-                            backgroundColor: [energeticPlayfulPalette.tealishGreen, energeticPlayfulPalette.lightGray],
-                            borderColor: [energeticPlayfulPalette.tealishGreen, energeticPlayfulPalette.lightGray],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {...defaultChartOptions, cutout: '70%%'} // Escaped %
+                new Chart(sanitationAccessCtx, { type: 'doughnut',
+                    data: { labels: ['Improved Sanitation', 'Unimproved/Open Defecation'],
+                        datasets: [{ label: 'Access to Improved Sanitation', data: [29, 71], backgroundColor: [energeticPlayfulPalette.tealishGreen, energeticPlayfulPalette.lightGray], borderColor: [energeticPlayfulPalette.tealishGreen, energeticPlayfulPalette.lightGray], borderWidth: 1 }]
+                    }, options: {...defaultChartOptions, cutout: '70%%'} // Escaped %
                 });
             }
         }
 
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initializeCharts);
-        } else {
-            initializeCharts(); 
-        }
+        if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initializeCharts); } 
+        else { initializeCharts(); }
 
-        const geminiModal = document.getElementById('geminiModal');
-        const geminiModalTitle = document.getElementById('geminiModalTitle');
-        const geminiModalContent = document.getElementById('geminiModalContent');
-        const geminiModalClose = document.getElementById('geminiModalClose');
+        const aiModal = document.getElementById('geminiModal'); // Consider renaming ID if class names were changed
+        const aiModalTitle = document.getElementById('geminiModalTitle');
+        const aiModalContent = document.getElementById('geminiModalContent');
+        const aiModalClose = document.getElementById('geminiModalClose');
 
-        if (geminiModalClose) {
-            geminiModalClose.addEventListener('click', () => {
-                if (geminiModal) geminiModal.style.display = 'none';
-            });
-        }
+        if (aiModalClose) { aiModalClose.addEventListener('click', () => { if (aiModal) aiModal.style.display = 'none'; }); }
 
-        function showGeminiModal(title, content) {
-            if (geminiModalTitle) geminiModalTitle.textContent = title;
-            if (geminiModalContent) geminiModalContent.innerHTML = content.replace(/\\n/g, '<br>'); 
-            if (geminiModal) geminiModal.style.display = 'flex';
+        function showAIModal(title, content) { // Renamed from showGeminiModal
+            if (aiModalTitle) aiModalTitle.textContent = title;
+            if (aiModalContent) aiModalContent.innerHTML = content.replace(/\\n/g, '<br>'); 
+            if (aiModal) aiModal.style.display = 'flex';
         }
         
-        window.fetchGeminiData = async function(context, type, responseElementId) {
+        window.fetchAIResponse = async function(context, type, responseElementId) { // Renamed from fetchGeminiData
             const responseElement = document.getElementById(responseElementId);
-            if (responseElement) {
-                 responseElement.style.display = 'none'; 
-                 responseElement.innerHTML = ''; 
-            }
-            showGeminiModal('✨ AI Assistant Loading...', 'Fetching insights from Gemini API. Please wait...');
+            if (responseElement) { responseElement.style.display = 'none'; responseElement.innerHTML = ''; }
+            showAIModal('✨ AI Assistant Loading...', 'Fetching insights from Llama 3.1 via Groq API. Please wait...');
 
             let prompt = "";
             if (type === 'risksOpportunities') {
@@ -763,55 +590,56 @@ def get_streamlit_app_content(gemini_api_key_js):
                 }
             }
 
-            if (!prompt) {
-                showGeminiModal('Error', 'Invalid context for Gemini API call.');
-                return;
-            }
+            if (!prompt) { showAIModal('Error', 'Invalid context for AI API call.'); return; }
             
-            // The '%s' here is the placeholder for Python to inject the API key
-            const apiKey = "%s"; 
-            if (!apiKey || apiKey === "YOUR_GEMINI_API_KEY_PLACEHOLDER" || apiKey === "") { 
-                 showGeminiModal('API Key Error', 'Gemini API key is not configured. Please ensure it is set up in Streamlit secrets (if deployed) or provided in the sidebar (for local use) and refresh the page.');
+            const apiKey = "%s"; // This is where Python injects the Groq API key
+            const modelName = "llama-3.1-70b-versatile"; // User specified model
+
+            if (!apiKey || apiKey === "YOUR_GROQ_API_KEY_PLACEHOLDER" || apiKey === "") { 
+                 showAIModal('API Key Error', 'Groq API key is not configured. Please ensure it is set up in Streamlit secrets (if deployed) or provided in the sidebar (for local use) and refresh the page.');
                  if (responseElement) responseElement.style.display = 'none';
                  return;
             }
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+            // Groq API uses OpenAI's chat completions format
+            const apiUrl = `https://api.groq.com/openai/v1/chat/completions`;
             
             const payload = {
-                contents: [{ role: "user", parts: [{ text: prompt }] }]
+                messages: [{ "role": "user", "content": prompt }],
+                model: modelName,
+                // You can add other parameters like temperature, max_tokens if needed
+                // temperature: 0.7,
+                // max_tokens: 1024, 
             };
 
             try {
                 const apiResponse = await fetch(apiUrl, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 
+                        'Authorization': `Bearer ${apiKey}`,
+                        'Content-Type': 'application/json'
+                    },
                     body: JSON.stringify(payload)
                 });
 
                 if (!apiResponse.ok) {
                     const errorData = await apiResponse.json();
-                    console.error('Gemini API Error:', errorData);
+                    console.error('Groq API Error:', errorData);
                     let detailedMessage = (errorData.error && errorData.error.message) ? errorData.error.message : 'Unknown error. Check browser console for details.';
-                    showGeminiModal('AI Assistant Error', `Could not fetch insights. Status: ${apiResponse.status}. Message: ${detailedMessage}`);
+                    showAIModal('AI Assistant Error', `Could not fetch insights from Groq. Status: ${apiResponse.status}. Message: ${detailedMessage}`);
                     return;
                 }
 
                 const result = await apiResponse.json();
                 
-                let text = "No content generated or error in response structure.";
-                if (result.candidates && result.candidates.length > 0 &&
-                    result.candidates[0].content && result.candidates[0].content.parts &&
-                    result.candidates[0].content.parts.length > 0 &&
-                    typeof result.candidates[0].content.parts[0].text === 'string') { 
-                    text = result.candidates[0].content.parts[0].text;
-                } else if (result.candidates && result.candidates.length > 0 && result.candidates[0].finishReason && result.candidates[0].finishReason !== "STOP") {
-                    text = `Content generation stopped. Reason: ${result.candidates[0].finishReason}.`;
-                    if (result.candidates[0].safetyRatings) {
-                        text += ` Safety Ratings: ${JSON.stringify(result.candidates[0].safetyRatings)}`;
-                    }
+                let text = "No content generated or error in Groq response structure.";
+                if (result.choices && result.choices.length > 0 &&
+                    result.choices[0].message && result.choices[0].message.content) {
+                    text = result.choices[0].message.content;
+                } else if (result.choices && result.choices.length > 0 && result.choices[0].finish_reason && result.choices[0].finish_reason !== "stop") {
+                     text = `Content generation stopped by Groq. Reason: ${result.choices[0].finish_reason}.`;
                 } else {
-                     showGeminiModal('AI Assistant Response', 'Received an empty or malformed response from the AI. Check console for details.');
-                     console.log("Malformed AI Response:", result);
+                     showAIModal('AI Assistant Response', 'Received an empty or malformed response from Groq. Check console for details.');
+                     console.log("Malformed Groq AI Response:", result);
                      return;
                 }
                 
@@ -819,21 +647,17 @@ def get_streamlit_app_content(gemini_api_key_js):
                     responseElement.innerHTML = text.replace(/\\n/g, '<br>'); 
                     responseElement.style.display = 'block';
                 }
-                if (geminiModal) geminiModal.style.display = 'none';
+                if (aiModal) aiModal.style.display = 'none';
 
             } catch (error) {
-                console.error('Fetch error:', error);
-                showGeminiModal('Network Error', 'Could not connect to the AI assistant. Please check your internet connection and API key. Error: ' + error.message);
+                console.error('Fetch error (Groq):', error);
+                showAIModal('Network Error', 'Could not connect to the AI assistant (Groq). Please check your internet connection and API key. Error: ' + error.message);
             }
         }
     """
 
-    # Inject the API key into the JS string template
-    # Ensure gemini_api_key_js is a string, even if empty
-    actual_script_content = script_content_js_template % (gemini_api_key_js if gemini_api_key_js is not None else "")
+    actual_script_content = script_content_js_template % (groq_api_key_js if groq_api_key_js is not None else "")
 
-
-    # Full HTML content to be rendered
     full_html = f"""
         <head>
             <meta charset="UTF-8">
@@ -842,15 +666,11 @@ def get_streamlit_app_content(gemini_api_key_js):
             <script src="https://cdn.tailwindcss.com"></script>
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-            <style>
-                {style_content}
-            </style>
+            <style>{style_content}</style>
         </head>
         <body>
             {body_content_html}
-            <script>
-                {actual_script_content}
-            </script>
+            <script>{actual_script_content}</script>
         </body>
     """
     return full_html
@@ -858,59 +678,54 @@ def get_streamlit_app_content(gemini_api_key_js):
 def main():
     st.set_page_config(page_title="PNG Infrastructure Infographic", layout="wide")
 
-    # --- API Key Handling ---
-    gemini_api_key = ""
-    # Try to get API key from Streamlit secrets (for deployed app)
+    groq_api_key = "" 
     try:
-        gemini_api_key = st.secrets.get("GEMINI_API_KEY", "")
-    except FileNotFoundError: # Handles if secrets.toml doesn't exist locally
-         st.sidebar.info("Local secrets.toml not found. Use sidebar input for API key if needed.")
-         gemini_api_key = "" # Ensure it's an empty string
-    except Exception: # Handles other cases where secrets are not configured
-        gemini_api_key = "" # Ensure it's an empty string
+        groq_api_key = st.secrets.get("GROQ_API_KEY", "")
+    except FileNotFoundError:
+         st.sidebar.info("Local secrets.toml not found. Use sidebar input for Groq API key if needed.")
+         groq_api_key = ""
+    except Exception:
+        groq_api_key = ""
 
-    st.sidebar.header("API Configuration")
-    if not gemini_api_key: # If not found in secrets (or secrets failed to load)
-        if "GEMINI_API_KEY" in st.secrets: # Check again explicitly in case of initial load issues
-             gemini_api_key = st.secrets.GEMINI_API_KEY
-             if gemini_api_key:
-                st.sidebar.success("Gemini API Key loaded from secrets.")
+    st.sidebar.header("API Configuration (Groq Llama 3.1)")
+    if not groq_api_key:
+        if "GROQ_API_KEY" in st.secrets:
+             groq_api_key = st.secrets.GROQ_API_KEY
+             if groq_api_key:
+                st.sidebar.success("Groq API Key loaded from secrets.")
 
-        if not gemini_api_key: # Still not found, provide input
-            st.sidebar.warning("Gemini API Key not found in Streamlit secrets.")
-            gemini_api_key_input = st.sidebar.text_input(
-                "Enter Gemini API Key for AI features:", 
+        if not groq_api_key:
+            st.sidebar.warning("Groq API Key not found in Streamlit secrets.")
+            groq_api_key_input = st.sidebar.text_input(
+                "Enter Groq API Key for Llama 3.1 features:", 
                 type="password", 
                 value="",
-                help="Your API key is used to fetch live insights. It is not stored if entered here for local testing."
+                help="Your Groq API key is used to fetch live insights via Llama 3.1."
             )
-            if gemini_api_key_input:
-                gemini_api_key = gemini_api_key_input
+            if groq_api_key_input:
+                groq_api_key = groq_api_key_input
             else:
-                st.sidebar.info("AI-powered insights (✨ buttons) will be disabled or show an error until a valid API key is provided and the page is re-run.")
+                st.sidebar.info("AI-powered insights (✨ buttons) will be disabled or show an error until a valid Groq API key is provided and the page is re-run.")
     else:
-        st.sidebar.success("Gemini API Key loaded from secrets.")
+        st.sidebar.success("Groq API Key loaded from secrets.")
 
-
-    # Information about API key and GitHub
     st.sidebar.markdown("---")
     st.sidebar.markdown(
         "**Important for GitHub & Deployment:**\n"
-        "When deploying this app (e.g., on Streamlit Community Cloud from a GitHub repo):\n"
         "1.  **Do NOT commit your API key directly into your `app.py` or any other file in your GitHub repository if it's public.**\n"
-        "2.  Store your `GEMINI_API_KEY` in the Streamlit app's secrets configuration on the deployment platform.\n\n"
+        "2.  Store your `GROQ_API_KEY` in the Streamlit app's secrets configuration on the deployment platform.\n\n"
         "**For local development, you can:**\n"
         "1. Use the input field above (key is not saved beyond the session).\n"
         "2. Or, create a `.streamlit/secrets.toml` file in your project's root directory with your key:\n"
         "   ```toml\n"
-        "   GEMINI_API_KEY = \"YOUR_ACTUAL_GEMINI_API_KEY\"\n"
+        "   GROQ_API_KEY = \"YOUR_ACTUAL_GROQ_API_KEY\"\n"
         "   ```"
     )
     st.sidebar.markdown("---")
+    st.sidebar.info("Using Groq API with Llama-3.1-70b-versatile model for AI insights.")
 
-    # Render the main HTML content
-    # Pass the API key (even if empty, JS will handle it)
-    html_content = get_streamlit_app_content(gemini_api_key_js=gemini_api_key)
+
+    html_content = get_streamlit_app_content(groq_api_key_js=groq_api_key)
     st.markdown(html_content, unsafe_allow_html=True)
 
 if __name__ == "__main__":
