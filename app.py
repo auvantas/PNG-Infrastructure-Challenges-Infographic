@@ -854,3 +854,64 @@ def get_streamlit_app_content(gemini_api_key_js):
         </body>
     """
     return full_html
+
+def main():
+    st.set_page_config(page_title="PNG Infrastructure Infographic", layout="wide")
+
+    # --- API Key Handling ---
+    gemini_api_key = ""
+    # Try to get API key from Streamlit secrets (for deployed app)
+    try:
+        gemini_api_key = st.secrets.get("GEMINI_API_KEY", "")
+    except FileNotFoundError: # Handles if secrets.toml doesn't exist locally
+         st.sidebar.info("Local secrets.toml not found. Use sidebar input for API key if needed.")
+         gemini_api_key = "" # Ensure it's an empty string
+    except Exception: # Handles other cases where secrets are not configured
+        gemini_api_key = "" # Ensure it's an empty string
+
+    st.sidebar.header("API Configuration")
+    if not gemini_api_key: # If not found in secrets (or secrets failed to load)
+        if "GEMINI_API_KEY" in st.secrets: # Check again explicitly in case of initial load issues
+             gemini_api_key = st.secrets.GEMINI_API_KEY
+             if gemini_api_key:
+                st.sidebar.success("Gemini API Key loaded from secrets.")
+
+        if not gemini_api_key: # Still not found, provide input
+            st.sidebar.warning("Gemini API Key not found in Streamlit secrets.")
+            gemini_api_key_input = st.sidebar.text_input(
+                "Enter Gemini API Key for AI features:", 
+                type="password", 
+                value="",
+                help="Your API key is used to fetch live insights. It is not stored if entered here for local testing."
+            )
+            if gemini_api_key_input:
+                gemini_api_key = gemini_api_key_input
+            else:
+                st.sidebar.info("AI-powered insights (✨ buttons) will be disabled or show an error until a valid API key is provided and the page is re-run.")
+    else:
+        st.sidebar.success("Gemini API Key loaded from secrets.")
+
+
+    # Information about API key and GitHub
+    st.sidebar.markdown("---")
+    st.sidebar.markdown(
+        "**Important for GitHub & Deployment:**\n"
+        "When deploying this app (e.g., on Streamlit Community Cloud from a GitHub repo):\n"
+        "1.  **Do NOT commit your API key directly into your `app.py` or any other file in your GitHub repository if it's public.**\n"
+        "2.  Store your `GEMINI_API_KEY` in the Streamlit app's secrets configuration on the deployment platform.\n\n"
+        "**For local development, you can:**\n"
+        "1. Use the input field above (key is not saved beyond the session).\n"
+        "2. Or, create a `.streamlit/secrets.toml` file in your project's root directory with your key:\n"
+        "   ```toml\n"
+        "   GEMINI_API_KEY = \"YOUR_ACTUAL_GEMINI_API_KEY\"\n"
+        "   ```"
+    )
+    st.sidebar.markdown("---")
+
+    # Render the main HTML content
+    # Pass the API key (even if empty, JS will handle it)
+    html_content = get_streamlit_app_content(gemini_api_key_js=gemini_api_key)
+    st.markdown(html_content, unsafe_allow_html=True)
+
+if __name__ == "__main__":
+    main()
